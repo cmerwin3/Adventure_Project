@@ -1,0 +1,40 @@
+[
+
+    {
+        "model": "ref_data.items",
+        "pk": 1,
+        "fields": {
+          "name": "Shortsword",
+          "description": "",
+          "weight": 1,
+          "damage_type": "slashing",
+          "damage_dice": 6,
+          "attack_modifier": 0
+        }
+    },
+    
+    {
+        "model": "ref_data.items",
+        "pk": 2,
+        "fields": {
+          "name": "Longsword",
+          "description": "",
+          "weight": 1,
+          "damage_type": "slashing",
+          "damage_dice": 8,
+          "attack_modifier": 0
+        }
+    },
+    {
+        "model": "ref_data.items",
+        "pk": 3,
+        "fields": {
+          "name": "Dagger",
+          "description": "",
+          "weight": 1,
+          "damage_type": "slashing",
+          "damage_dice": 4,
+          "attack_modifier": 0
+        }
+    }
+]
