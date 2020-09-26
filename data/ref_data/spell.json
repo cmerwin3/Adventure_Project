@@ -1,0 +1,16 @@
+[
+    {
+        "model": "ref_data.Spell",
+        "pk": 1,
+        "fields": {
+          "name": "cure_wounds",
+          "spell_level": 1,
+          "school":"evocation",
+          "description": "cure wounds",
+          "damage_type": "healing",
+          "damage_dice": 8
+    
+          }
+    }
+
+]

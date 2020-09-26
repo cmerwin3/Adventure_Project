@@ -1,53 +1,81 @@
 from django.db import models
 
-# Create your models here.
+class ClassType(models.TextChoices):
+    CLERIC = 'Cleric'
+    FIGHTER = 'Fighter'
+    ROUGE = 'Rouge'
+    WIZARD = 'Wizard'
 
-class Classes(models.Model):
-    name = models.CharField(max_length=30)
+class RaceType(models.TextChoices):
+    DWARF = 'Dwarf'
+    ELF = 'Elf'
+    HALFLING = 'Halfling'
+    HUMAN = 'Human'
+
+'''
+class Ability(models.TextChoices):
+    STRENGTH = 'Strength'
+    DEXTERITY = 'Dexterity'
+    CONSTITUTION = 'Constitution'
+    INTELLEGENCE = 'Intellegence'
+    WISDOM = 'Wisdom'
+    CHARISMA = 'Charisma'
+
+class Skill(models.TextChoices):
+    ACROBATICS = 
+    ANIMAL_HANDILING = 
+'''
+
+    
+    
+
+    
+class ClassLevel(models.Model):
+    class_type = models.CharField(max_length=30, null=True, choices=ClassType.choices)
     level = models.IntegerField()
-    hit_dice = models.IntegerField()
-    proficencies = models.CharField(max_length=30)
-    #features 
+    hit_dice_type = models.IntegerField()
+    '''proficencies = models.CharField(max_length=30)
+    proficencies_bounus= models.IntegerField()'''
+    spell_slot = models.IntegerField()
+    class Meta:
+        db_table = 'class_level'
+
+    
     
 
-'''
-class Features_Clasess():   
-    name 
-    description
-'''
-    
-
-class Races(models.Model):
-    name = models.CharField(max_length=30)
+class Race(models.Model):
+    race_type = models.CharField(max_length=30, null=True, choices=RaceType.choices)
     speed = models.IntegerField()
     hav_dv = models.BooleanField()
-    #features
     str_bounus = models.IntegerField()
     dex_bonus = models.IntegerField()
     con_bonus = models.IntegerField()
     int_bonus = models.IntegerField()
     wis_bonus = models.IntegerField()
     cha_bonus = models.IntegerField()
+    class Meta: 
+        db_table = 'race'
 
-'''class Features_Races():
-    name
-    description
-'''
+
     
-class Items(models.Model):
+class Item(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     weight = models.IntegerField()
     damage_type = models.CharField(max_length=30)
     damage_dice = models.IntegerField()
     attack_modifier = models.IntegerField()
+    class Meta: 
+        db_table = 'item'
 
 
-class Spells(models.Model):
+class Spell(models.Model):
     name = models.CharField(max_length=30)
     spell_level = models.IntegerField()
     school = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     damage_type = models.CharField(max_length=30)
     damage_dice = models.IntegerField()
+    class Meta: 
+        db_table = 'spell'
 

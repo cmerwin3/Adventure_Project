@@ -1,0 +1,31 @@
+[
+
+    {
+        "model": "character.Character",
+        "pk": 1,
+        "fields": {
+            "name": "Charlie",
+            "is_pc": true,
+            "class_level": 1,
+            "race": 1,
+            "items": [1],
+            "spells": [1],
+            "hit_dice_current": 1,
+            "hit_points_total": 10, 
+            "hit_points_current": 10,
+            "strength": 12,
+            "dexterity": 13,
+            "constitution": 14,
+            "intelligence": 10,
+            "wisdom": 15,
+            "charisma": 8
+        }   
+
+            
+        
+    }
+    
+]
+
+
+

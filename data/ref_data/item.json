@@ -1,0 +1,15 @@
+[
+    {
+        "model": "ref_data.Item",
+        "pk": 1,
+        "fields": {
+          "name": "Longsword",
+          "description": "",
+          "weight": 1,
+          "damage_type": "slashing",
+          "damage_dice": 8,
+          "attack_modifier": 0
+        }
+    }
+
+]

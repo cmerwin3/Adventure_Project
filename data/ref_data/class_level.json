@@ -1,0 +1,15 @@
+[
+
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 1,
+        "fields": {
+            "class_type" : "Cleric",
+            "level": 1,
+            "hit_dice_type" : 8,
+            "spell_slot" : 2
+        }
+        
+    }
+    
+]
