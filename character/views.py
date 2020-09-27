@@ -1,3 +1,10 @@
+'''
+The Views for a Character
+'''
 from django.shortcuts import render
+import character
 
-# Create your views here.
+
+def home(request):
+    char = Character.objects.first()
+    return render(request, 'character_sheet.html', {'character':char})
