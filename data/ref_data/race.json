@@ -3,6 +3,56 @@
         "model": "ref_data.Race",
         "pk": 1,
         "fields": {
+          "race_type": "elf",
+          "speed": 35,
+          "hav_dv": true,
+          "str_bounus": 0,
+          "dex_bonus": 2,
+          "con_bonus": 0,
+          "int_bonus": 1,
+          "wis_bonus": 1,
+          "cha_bonus": 0
+    
+          }
+    },
+
+    {
+        "model": "ref_data.Race",
+        "pk": 2,
+        "fields": {
+          "race_type": "dwarf",
+          "speed": 25,
+          "hav_dv": true,
+          "str_bounus": 1,
+          "dex_bonus": 0,
+          "con_bonus": 2,
+          "int_bonus": 0,
+          "wis_bonus": 1,
+          "cha_bonus": 0
+    
+          }
+    },
+
+    {
+        "model": "ref_data.Race",
+        "pk": 3,
+        "fields": {
+          "race_type": "halfling",
+          "speed": 25,
+          "hav_dv": false,
+          "str_bounus": 0,
+          "dex_bonus": 2,
+          "con_bonus": 1,
+          "int_bonus": 0,
+          "wis_bonus": 0,
+          "cha_bonus": 1
+    
+          }
+    },
+    {
+        "model": "ref_data.Race",
+        "pk": 4,
+        "fields": {
           "race_type": "human",
           "speed": 30,
           "hav_dv": false,

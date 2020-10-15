@@ -11,6 +11,19 @@
           "damage_dice": 8
     
           }
+    },
+    {
+        "model": "ref_data.Spell",
+        "pk": 2,
+        "fields": {
+          "name": "inflict_wounds",
+          "spell_level": 1,
+          "school": "evocation",
+          "description": "inflict wounds",
+          "damage_type": "necrotic",
+          "damage_dice": 8
+    
+          }
     }
 
 ]

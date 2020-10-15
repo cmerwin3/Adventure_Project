@@ -12,6 +12,31 @@ class RaceType(models.TextChoices):
     HALFLING = 'Halfling'
     HUMAN = 'Human'
 
+class DamageType(models.TextChoices):
+    BLUDGEONING = 'Bludgeoning'
+    PIERCING = 'Piercing'
+    SLASHING = 'Slashing'
+    FORCE = 'Force'
+    FIRE = 'Fire'
+    FROST = 'Frost'
+    LIGHTNING = 'Lightning'
+    POISON = 'Poison'
+    ACID = 'Acid'
+    NECROTIC = 'Necrotic'
+    RADIANT = 'Radiant'
+    HEALING = 'Healing'
+
+class SchoolType(models.TextChoices) :
+    ABJURATION ='Abjuration'
+    CONJURATION = 'Conjuration'
+    DIVINATION = 'Divination'
+    ENCHANTMENT = 'Enchantment'
+    EVOCATION = 'Evocation'
+    ILLUSION = 'Illusion'
+    NECROMANCY = 'Necromancy'
+    TRANSMUTATION = 'Transmutaion'
+
+
 '''
 class Ability(models.TextChoices):
     STRENGTH = 'Strength'
@@ -62,7 +87,7 @@ class Item(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     weight = models.IntegerField()
-    damage_type = models.CharField(max_length=30)
+    damage_type = models.CharField(max_length=30, null=True, choices=DamageType.choices)
     damage_dice = models.IntegerField()
     attack_modifier = models.IntegerField()
     class Meta: 
@@ -72,9 +97,9 @@ class Item(models.Model):
 class Spell(models.Model):
     name = models.CharField(max_length=30)
     spell_level = models.IntegerField()
-    school = models.CharField(max_length=30)
+    school = models.CharField(max_length=30, null=True, choices=SchoolType.choices)
     description = models.CharField(max_length=100)
-    damage_type = models.CharField(max_length=30)
+    damage_type = models.CharField(max_length=30, null=True, choices=DamageType.choices)
     damage_dice = models.IntegerField()
     class Meta: 
         db_table = 'spell'

@@ -6,10 +6,106 @@
           "name": "Longsword",
           "description": "",
           "weight": 1,
-          "damage_type": "slashing",
+          "damage_type": "piercing",
           "damage_dice": 8,
           "attack_modifier": 0
         }
+    },
+    {
+      "model": "ref_data.Item",
+      "pk": 2,
+      "fields": {
+        "name": "Shortsword",
+        "description": "",
+        "weight": 1,
+        "damage_type": "piercing",
+        "damage_dice": 6,
+        "attack_modifier": 0
+      }
+  },
+  {
+    "model": "ref_data.Item",
+    "pk": 3,
+    "fields": {
+      "name": "Battleaxe",
+      "description": "",
+      "weight": 1,
+      "damage_type": "slashing",
+      "damage_dice": 8,
+      "attack_modifier": 0
     }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 4,
+  "fields": {
+    "name": "Handaxe",
+    "description": "",
+    "weight": 1,
+    "damage_type": "slashing",
+    "damage_dice": 6,
+    "attack_modifier": 0
+  }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 5,
+  "fields": {
+    "name": "Warhammer",
+    "description": "",
+    "weight": 1,
+    "damage_type": "bludgeoning",
+    "damage_dice": 8,
+    "attack_modifier": 0
+  }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 6,
+  "fields": {
+    "name": "Mace",
+    "description": "",
+    "weight": 1,
+    "damage_type": "bludgeoning",
+    "damage_dice": 6,
+    "attack_modifier": 0
+  }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 7,
+  "fields": {
+    "name": "Rapier",
+    "description": "",
+    "weight": 1,
+    "damage_type": "piercing",
+    "damage_dice": 8,
+    "attack_modifier": 0
+  }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 8,
+  "fields": {
+    "name": "Dagger",
+    "description": "",
+    "weight": 1,
+    "damage_type": "slashing",
+    "damage_dice": 4,
+    "attack_modifier": 0
+  }
+},
+{
+  "model": "ref_data.Item",
+  "pk": 9,
+  "fields": {
+    "name": "Staff",
+    "description": "",
+    "weight": 1,
+    "damage_type": "bludgeoning",
+    "damage_dice": 6,
+    "attack_modifier": 0
+  }
+}
 
 ]

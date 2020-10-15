@@ -10,6 +10,217 @@
             "spell_slot" : 2
         }
         
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 2,
+        "fields": {
+            "class_type" : "Cleric",
+            "level": 2,
+            "hit_dice_type" : 8,
+            "spell_slot" : 3
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 3,
+        "fields": {
+            "class_type" : "Cleric",
+            "level": 3,
+            "hit_dice_type" : 8,
+            "spell_slot" : 6
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 4,
+        "fields": {
+            "class_type" : "Cleric",
+            "level": 4,
+            "hit_dice_type" : 8,
+            "spell_slot" : 7
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 5,
+        "fields": {
+            "class_type" : "Cleric",
+            "level": 5,
+            "hit_dice_type" : 8,
+            "spell_slot" : 9
+        }
+        
+    },
+
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 6,
+        "fields": {
+            "class_type" : "figther",
+            "level": 1,
+            "hit_dice_type" : 10,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 7,
+        "fields": {
+            "class_type" : "figther",
+            "level": 2,
+            "hit_dice_type" : 10,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 8,
+        "fields": {
+            "class_type" : "figther",
+            "level": 3,
+            "hit_dice_type" : 10,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 9,
+        "fields": {
+            "class_type" : "figther",
+            "level": 4,
+            "hit_dice_type" : 10,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 10,
+        "fields": {
+            "class_type" : "figther",
+            "level": 5,
+            "hit_dice_type" : 10,
+            "spell_slot" : 0
+        }
+        
+    },
+    
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 11,
+        "fields": {
+            "class_type" : "rouge",
+            "level": 1,
+            "hit_dice_type" : 8,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 12,
+        "fields": {
+            "class_type" : "rouge",
+            "level": 2,
+            "hit_dice_type" : 8,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 13,
+        "fields": {
+            "class_type" : "rouge",
+            "level": 3,
+            "hit_dice_type" : 8,
+            "spell_slot" : 0
+        }
+        
+    }, {
+        "model": "ref_data.ClassLevel",
+        "pk": 14,
+        "fields": {
+            "class_type" : "rouge",
+            "level": 4,
+            "hit_dice_type" : 8,
+            "spell_slot" : 0
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 15,
+        "fields": {
+            "class_type" : "rouge",
+            "level": 5,
+            "hit_dice_type" : 8,
+            "spell_slot" : 0
+        }
+        
+    },
+
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 16,
+        "fields": {
+            "class_type" : "wizard",
+            "level": 1,
+            "hit_dice_type" : 6,
+            "spell_slot" : 2
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 17,
+        "fields": {
+            "class_type" : "wizard",
+            "level": 2,
+            "hit_dice_type" : 6,
+            "spell_slot" : 3
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 18,
+        "fields": {
+            "class_type" : "wizard",
+            "level": 3,
+            "hit_dice_type" : 6,
+            "spell_slot" : 6
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 19,
+        "fields": {
+            "class_type" : "wizard",
+            "level": 4,
+            "hit_dice_type" : 6,
+            "spell_slot" : 7
+        }
+        
+    },
+    {
+        "model": "ref_data.ClassLevel",
+        "pk": 20,
+        "fields": {
+            "class_type" : "wizard",
+            "level": 5,
+            "hit_dice_type" : 6,
+            "spell_slot" : 9
+        }
+        
     }
     
 ]
