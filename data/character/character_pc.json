@@ -13,12 +13,13 @@
             "hit_dice_current": 1,
             "hit_points_total": 10, 
             "hit_points_current": 10,
-            "strength": 12,
-            "dexterity": 13,
-            "constitution": 14,
-            "intelligence": 10,
-            "wisdom": 15,
-            "charisma": 8
+            "armor_class": 16,
+            "strength": 1,
+            "dexterity": 1,
+            "constitution": 2,
+            "intelligence": 0,
+            "wisdom": 3,
+            "charisma": -1
         }   
 
             

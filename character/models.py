@@ -21,6 +21,9 @@ class Character(models.Model):
     hit_points_total = models.IntegerField()
     hit_points_current = models.IntegerField()
     
+    
+    armor_class = models.IntegerField()
+    
     strength = models.IntegerField()
     dexterity = models.IntegerField()
     constitution = models.IntegerField()

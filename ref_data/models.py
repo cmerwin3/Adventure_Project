@@ -87,6 +87,7 @@ class Item(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     weight = models.IntegerField()
+    has_finesse = models.BooleanField()
     damage_type = models.CharField(max_length=30, null=True, choices=DamageType.choices)
     damage_dice = models.IntegerField()
     attack_modifier = models.IntegerField()

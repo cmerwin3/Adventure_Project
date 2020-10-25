@@ -1,1 +1,63 @@
-<h1>Hello {{name}}</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adventure Game - by Cameron Merwin</title>
+    <!--
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
+    -->
+    <style>
+        body {
+            background-color: powderblue;
+            color: black; 
+	        margin-top: 0;
+	        margin-bottom: 0;
+	        margin-left: 0;
+	        margin-right: 0;
+	        padding: 0; 
+	        font-family: Verdana, sans-serif;
+	        font-size: 11px; 
+            height: 100%;
+        }
+        div.title_row
+        {
+            top:0px; 
+            left:0px; 
+            right:0px; 
+            height: 65px;	
+	        padding: 0px 2px;
+            background-color: #c0c0c0;
+        }
+        div.top_panel
+        {
+            background-color: #c0c0c0;
+            position: relative;
+            min-height: 100%;
+        	margin:2px 0px 0px 0px;
+	        margin-left: auto ;
+	        margin-right: auto ;  	
+        }
+        div.bottom_panel
+        {
+            background-color: #c0c0c0;
+            position: relative;
+            bottom: 0;
+            border: 3px solid #35161F;
+        	margin: 2px 0px 0px 0px;
+	        margin-left: auto ;
+	        margin-right: auto ;  	
+        }
+    </style>
+</head>
+<body class="about_background">
+    <div class="title_row">
+        Adventure Project
+    </div>
+    <div class="top_panel">
+        <p>Avatars go here...</p>
+    </div>
+    <div class="bottom_panel">
+        <p>Hello {{name}}!</p>
+    </div>
+</body>
+</html>

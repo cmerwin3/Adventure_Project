@@ -1,0 +1,56 @@
+~Character Template~
+
+{
+        "model": "character.Character",
+        "pk": ,
+        "fields": {
+            "name": ,
+            "is_pc": T/F ,
+            "class_level": ,
+            "race": ,
+            "items": [],
+            "spells": [],
+            "hit_dice_current": ,
+            "hit_points_total": , 
+            "hit_points_current": ,
+            "armor_class": 10,
+            "strength": 10,
+            "dexterity": 10,
+            "constitution": 10,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+        },
+
+~Item Template~
+
+{
+  "model": "ref_data.Item",
+  "pk": ,
+  "fields": {
+    "name": "",
+    "description": "",
+    "weight": ,
+    "has_finesse": false,
+    "damage_type": "",
+    "damage_dice": ,
+    "attack_modifier": 
+  }
+},
+
+~Spell Template~
+
+[
+    {
+        "model": "ref_data.Spell",
+        "pk": ,
+        "fields": {
+          "name": "",
+          "spell_level": ,
+          "school":"",
+          "description": "",
+          "damage_type": "",
+          "damage_dice": 
+    
+          }
+    },

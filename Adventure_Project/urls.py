@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import character
+from character import views as character_views
+from combat import views as combat_views
+from storyboard import views as storyboard_views
 
 urlpatterns = [
-    path('', include('calc.urls')),
-    path('character', character.views.home),
     path('admin/', admin.site.urls),
-
-
+    path('', storyboard_views.home , name='main-page'),
+    path('character/<int:character_id>/', character_views.show_character, name='view-one-char'),
+    path('character/', character_views.show_character, name='view-first-char'),
+    path('combat/', combat_views.do_combat, name='combat')
 ]
