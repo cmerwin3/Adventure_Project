@@ -1,0 +1,253 @@
+/**** 
+ Global Styles
+***/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: gray;
+/*
+    color: black; 
+    font-family: Palatino, Garamond, Verdana, sans-serif;
+    font-size: 14px; 
+*/
+    font-family: Times, Garamond, Verdana, sans-serif;
+    font-size: 16px; 
+    color: white;
+    text-shadow: 1px 1px 1px gray;
+
+}
+button {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    color: black;
+    font-family: Bookman, Garamond, Verdana, sans-serif;
+    font-size: 18px; 
+    padding: 10px 10px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 10px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+/**** 
+ Title Panel with headers
+***/
+div.title_panel {
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+    right: 0px; 
+    height: 45px;	
+    background-color: #9fb5e2;
+    border-bottom: 2px solid black;
+}
+h1 {    /* header title */
+    display: inline;
+    float:left;
+    font-family: Palatino, Garamond, Verdana, sans-serif;
+    color: black; 
+    font-size: 25px; 
+    font-weight: bold;
+    font-style: italic;
+    padding: 10px 10px 10px 15px;
+}
+h2 {    /* sub title */
+    display: inline;
+    float:left;
+    font-family: Palatino, Verdana, sans-serif;
+    color: black; 
+    font-size: 15px; 
+    font-weight: normal;
+    font-style: italic;
+    padding: 18px 10px 10px 10px;
+    vertical-align: bottom;
+}
+
+/**** 
+ Character Panel in center of display
+***/
+div.character_panel {
+    position: absolute;
+    top: 45px;
+    bottom: 0px;
+    left: 0px; 
+    right: 0px; 
+    background-image: url("/static/images/background_3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+table.characters_left {
+    float: left;
+    border-spacing:10px 0px;
+}
+table.characters_right {
+    float: right;
+    border-spacing:10px 0px;
+}
+td.character {
+    border:3px solid #35161F;
+    border-radius: 10px;
+    background-image: linear-gradient( gray, #1a2e57);
+    text-align: center;
+    color: lightgray; 
+    font-size: 15px; 
+    font-weight: bold;
+    font-style: italic;
+}
+td.character img {
+    width:120px;
+    height:200px;
+}
+td.character:hover {
+    border:3px solid #c0c0c0;
+}
+td.character:hover .character-tooltip {
+    visibility: visible;
+}
+div.character-tooltip {
+    visibility: hidden;
+    width: 120px;
+    height: 150px;
+    background-color: #1a2e57;
+    color: lightgray;
+    text-align: left;
+    font-size: 12px; 
+    font-weight: normal;
+    font-style: normal;
+    padding: 5px 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+/**** 
+ Dialogue Panel at bottom of display
+***/
+div.dialogue_panel {
+    position: absolute;
+    bottom: 20px;
+    left:20px; 
+    right:20px;
+    /* rgba() ensures opacity applies only to the background color, not the text */
+    background: rgba(128, 128, 128, 0.8);
+    /* opacity: 0.8; */
+    height: 250px;
+    border: 5px solid #33328b;
+    border-radius: 12px;
+}
+
+
+/**** 
+ Dialogue Panel - Script mode
+***/
+div.script_display {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+p.script {
+    font-family: Times, Garamond, Verdana, sans-serif;
+    font-size: 16px; 
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    padding: 10px;
+}
+table.response_table {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+a.response_btn {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    color: black;
+    font-family: Bookman, Garamond, Verdana, sans-serif;
+    font-size: 18px; 
+    padding: 10px 10px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 10px;
+    cursor: pointer;
+    opacity: 1;
+}
+span.response {
+    font-family: Bookman, Garamond, Verdana, sans-serif;
+    font-size: 18px; 
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+
+/**** 
+ Dialogue Panel - Combat mode
+***/
+div.combat_display {
+    position: absolute;
+    /* background: green; */
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+div.combat_status_bar {
+    position: absolute;
+    top: 0px;
+    height: 60px;
+    width: 80%;
+    padding: 10px;
+}
+table.combat_buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    width: 80%;
+    table-layout: fixed;
+    padding: 20px 20px;
+}
+div.combat_turns {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20%;
+    height: 100%;
+    border-left: 5px solid #33328b;
+    padding: 20px;
+}
+
+/**** 
+ Dialogue Panel - Loading display with spinner
+***/
+/**
+div.loading_display {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+**/
+div.loading_spinner {
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    /*
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    */
+    color: black;
+    text-align: center;
+}
+div.loading_spinner img {
+    width:120px;
+    height:120px;
+}

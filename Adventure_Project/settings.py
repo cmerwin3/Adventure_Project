@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'storyboard',
     'ref_data',
     'character',
-    'combat'
+    'combat',
+    'ui'
 ]
 
 MIDDLEWARE = [

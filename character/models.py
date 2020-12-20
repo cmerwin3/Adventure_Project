@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.forms.models import model_to_dict
 from ref_data.models import ClassLevel, Race, Item, Spell
 
 class Character(models.Model):
@@ -47,3 +47,36 @@ class Character(models.Model):
     class Meta:
         db_table = 'character'
 
+    '''
+    Convert a Character instance to a dict (usefull for REST API's).  
+    The standard model_to_dict() does not handle foreign key tables very well.
+    '''
+    def to_dict(self):
+        data = {}                           # create empty dict
+        opts = self._meta                   # get the metadata options for this class
+
+        # add each field value to the dict (including foreign-key sub classes, not just id's)
+        for field in opts.concrete_fields:  
+            value = field.value_from_object(self)
+            if field.name is 'class_level':
+                if value is None:
+                    data[field.name] = None
+                else:
+                    class_level = ClassLevel.objects.get(pk=value)
+                    data[field.name] = model_to_dict(class_level)
+            elif field.name is 'race':
+                if value is None:
+                    data[field.name] = None
+                else:
+                    race = Race.objects.get(pk=value)
+                    data[field.name] = model_to_dict(race)
+            else:
+                data[field.name] = value
+
+        # add each item and spell detailed instance to the dict
+        for field in opts.many_to_many:
+            object_list = []
+            for obj in field.value_from_object(self):
+                object_list.append(model_to_dict(obj))
+            data[field.name] = object_list
+        return data

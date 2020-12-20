@@ -2,62 +2,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Adventure Game - by Cameron Merwin</title>
-    <!--
+    <title>Adventure Project - by Cameron Merwin</title>
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
-    -->
-    <style>
-        body {
-            background-color: powderblue;
-            color: black; 
-	        margin-top: 0;
-	        margin-bottom: 0;
-	        margin-left: 0;
-	        margin-right: 0;
-	        padding: 0; 
-	        font-family: Verdana, sans-serif;
-	        font-size: 11px; 
-            height: 100%;
-        }
-        div.title_row
-        {
-            top:0px; 
-            left:0px; 
-            right:0px; 
-            height: 65px;	
-	        padding: 0px 2px;
-            background-color: #c0c0c0;
-        }
-        div.top_panel
-        {
-            background-color: #c0c0c0;
-            position: relative;
-            min-height: 100%;
-        	margin:2px 0px 0px 0px;
-	        margin-left: auto ;
-	        margin-right: auto ;  	
-        }
-        div.bottom_panel
-        {
-            background-color: #c0c0c0;
-            position: relative;
-            bottom: 0;
-            border: 3px solid #35161F;
-        	margin: 2px 0px 0px 0px;
-	        margin-left: auto ;
-	        margin-right: auto ;  	
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'characters.js' %}"></script>
 </head>
-<body class="about_background">
-    <div class="title_row">
-        Adventure Project
+<body>
+    <div class="title_panel">
+        <h1>Adventure Project</h1><h2>by Cameron Merwin</h2>
     </div>
-    <div class="top_panel">
-        <p>Avatars go here...</p>
+    <div class="character_panel">
+        <table class="characters_left">
+            <tr class="pc_character_row">
+                <td class="character">
+                    <img src="/static/images/character-avatar-1.png"/><br/>
+                    Cameron
+                </td>
+                <td class="character">
+                    <img src="/static/images/character-avatar-2.png"/><br/>
+                    Charlie
+                    <div class="character-tooltip">
+                        Class: Rogue<br/>
+                        Level: 2<br/>
+                        Strength: 5<br/>
+                        Dexterity: 10<br/>
+                        Constitution: 2<br/>
+                        Intelligence: 9<br/>
+                        Wisdom: 7<br/>
+                        Charisma: 3<br/>
+                        <b>Hit Points: 50</b>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="characters_right">
+            <tr>
+                <td class="character">
+                    <img src="/static/images/npc-1.png"/><br/>
+                    Smaug
+                </td>
+            </tr>
+        </table>
+        <div class="loading_spinner">
+            <img src="/static/images/spinner_1.gif"/><br/>
+            Entering Combat...
+        </div>
     </div>
-    <div class="bottom_panel">
-        <p>Hello {{name}}!</p>
+    <div class="dialogue_panel">
+        <div class="script_display">
+            <!-- <p><b>Current Turn: {{name}}</b></p>-->
+            <p class="script">You are in an open field... You see a creature...  He asks "What are you doing here?"</p>
+            <table class="response_table">
+                <tr>
+                    <td><a href="#"  class="response_btn">A:</a><span class="response">Ignore him and continue walking.</span></td>
+                    <td><a href="#" class="response_btn">B:</a><span class="response">Ask: "Do you have the golden key?"</span></td>
+                </tr>
+                <tr>
+                    <td><button onclick="javascript:initiate_combat_mode();">C:</button>
+                        <span class="response">Attack the creature.</span></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="combat_display">
+            <div class="combat_status_bar">
+                Here is the status...
+            </div>
+            <table class="combat_buttons">
+                <tr>
+                    <td><button onclick="javascript:void(0);">Attack</button></td>
+                    <td><button onclick="javascript:void(0);">Spell</button></td>
+                    <td><button onclick="javascript:void(0);">Run</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="javascript:void(0);">Defend</button></td>
+                    <td><button onclick="javascript:void(0);">Item</button></td>
+                    <td></td>
+                </tr>
+            </table>
+            <div class="combat_turns">
+                <b>Next Turns:</b><br/><br/>
+                1) Cameron<br/>
+                2) Charlie<br/>
+                3) The Orc<br/>
+                4) Smaug<br/>
+            </div>            
+        </div>
     </div>
 </body>
 </html>
