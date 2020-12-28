@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'characters.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
 </head>
 <body>
     <div class="title_panel">
@@ -14,13 +15,15 @@
     <div class="character_panel">
         <table class="characters_left">
             <tr class="pc_character_row">
+                
                 <td class="character">
-                    <img src="/static/images/character-avatar-1.png"/><br/>
-                    Cameron
+                    <img src="/static/images/character-1.png"/><br/>
+                    Cleric
                 </td>
+                
                 <td class="character">
-                    <img src="/static/images/character-avatar-2.png"/><br/>
-                    Charlie
+                    <img src="/static/images/character-2.png"/><br/>
+                    Rouge
                     <div class="character-tooltip">
                         Class: Rogue<br/>
                         Level: 2<br/>
@@ -33,13 +36,24 @@
                         <b>Hit Points: 50</b>
                     </div>
                 </td>
+                
+                <td class="character">
+                    <img src="/static/images/character-3.png"/><br/>
+                    Wizard
+                </td>
+                
+                <td class="character">
+                    <img src="/static/images/character-4.png"/><br/>
+                    Fighter
+                </td>
+            
             </tr>
         </table>
         <table class="characters_right">
             <tr>
                 <td class="character">
-                    <img src="/static/images/npc-1.png"/><br/>
-                    Smaug
+                    <img src="/static/images/npc-101.png"/><br/>
+                    Goblin
                 </td>
             </tr>
         </table>
@@ -51,7 +65,7 @@
     <div class="dialogue_panel">
         <div class="script_display">
             <!-- <p><b>Current Turn: {{name}}</b></p>-->
-            <p class="script">You are in an open field... You see a creature...  He asks "What are you doing here?"</p>
+            <p class="script" id="prompt">You are in an open field... You see a creature...  He asks "What are you doing here?"</p>
             <table class="response_table">
                 <tr>
                     <td><a href="#"  class="response_btn">A:</a><span class="response">Ignore him and continue walking.</span></td>

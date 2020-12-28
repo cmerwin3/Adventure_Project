@@ -18,11 +18,14 @@ from django.urls import path, include
 from character import views as character_views
 from combat import views as combat_views
 from ui import views as ui_views
+from storyboard import views as storyboard_views
+#from game_data import game_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ui_views.home , name='main-page'),
     path('character/<int:character_id>/', character_views.show_character, name='view-one-char'),
     path('character/', character_views.show_character, name='view-first-char'),
-    path('combat/', combat_views.do_combat, name='combat')
+    path('combat/', combat_views.do_combat, name='combat'),
+    path('script/<int:script_id>/', storyboard_views.get_script, name='get-script')
 ]

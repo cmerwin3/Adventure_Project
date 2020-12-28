@@ -21,7 +21,7 @@
                 // create new character <td> html element string and plug in the values
                 var new_elem = `
                     <td class="character" id="char_${json.id}">
-                        <img src="/static/images/character-avatar-1.png"/><br/>
+                        <img src="/static/images/character-${json.avatar_id}.png"/><br/>
                         ${json.name}
                         <div class="character-tooltip">
                             Class: ${json.class_level.class_type}<br/>
@@ -118,4 +118,5 @@
     $(document).ready(function() {
         load_character_sheet(1);
         display_character_health();
+        load_script(1);
     });

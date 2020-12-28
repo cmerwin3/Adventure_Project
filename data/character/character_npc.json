@@ -2,8 +2,9 @@
 
     {
         "model": "character.Character",
-        "pk": 11,
+        "pk": 10001,
         "fields": {
+            "avatar_id": 10001,
             "name": "Goblin",
             "is_pc": false,
             "class_level": null,

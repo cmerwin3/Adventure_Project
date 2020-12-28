@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'ref_data',
     'character',
     'combat',
-    'ui'
+    'ui',
+    'game_data'
 ]
 
 MIDDLEWARE = [

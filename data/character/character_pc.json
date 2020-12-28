@@ -4,6 +4,7 @@
         "model": "character.Character",
         "pk": 1,
         "fields": {
+            "avatar_id": 1,
             "name": "Charlie",
             "is_pc": true,
             "class_level": 1,

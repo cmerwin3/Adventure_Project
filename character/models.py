@@ -1,9 +1,15 @@
 from django.db import models
 from django.forms.models import model_to_dict
 from ref_data.models import ClassLevel, Race, Item, Spell
+from game_data.models import GameData
+
 
 class Character(models.Model):
     
+    game_id = models.ForeignKey(GameData, null=True, on_delete=models.SET_NULL)
+
+    avatar_id = models.IntegerField()
+
     name = models.CharField(max_length=30)
 
     is_pc = models.BooleanField()
@@ -30,6 +36,7 @@ class Character(models.Model):
     intelligence = models.IntegerField()
     wisdom = models.IntegerField()
     charisma = models.IntegerField()
+
 
     '''
     strength_save = models.BooleanField()
