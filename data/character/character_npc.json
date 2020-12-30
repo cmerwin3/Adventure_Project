@@ -2,9 +2,9 @@
 
     {
         "model": "character.Character",
-        "pk": 10001,
+        "pk": 1001,
         "fields": {
-            "avatar_id": 10001,
+            "avatar_id": 1001,
             "name": "Goblin",
             "is_pc": false,
             "class_level": null,
@@ -21,11 +21,75 @@
             "intelligence": -2,
             "wisdom": -1,
             "charisma": -1
-        }   
-
-            
-        
+        }
+    },        
+    {
+        "model": "character.Character",
+        "pk": 1002,
+        "fields": {
+            "avatar_id": 1002,
+            "name": "Goblin Mage",
+            "is_pc": false,
+            "class_level": null,
+            "race": null,
+            "items": [8],
+            "spells": [2],
+            "hit_dice_current": 1,
+            "hit_points_total": 6, 
+            "hit_points_current": 6,
+            "armor_class": 12,
+            "strength": -1,
+            "dexterity": 2,
+            "constitution": 0,
+            "intelligence": 1,
+            "wisdom": -1,
+            "charisma": -1
+        }      
+    },
+    {
+        "model": "character.Character",
+        "pk": 1003,
+        "fields": {
+            "avatar_id": 1003,
+            "name": "Orc",
+            "is_pc": false,
+            "class_level": null,
+            "race": null,
+            "items": [3],
+            "spells": [],
+            "hit_dice_current": 2,
+            "hit_points_total": 16, 
+            "hit_points_current": 16,
+            "armor_class": 13,
+            "strength": 3,
+            "dexterity": 1,
+            "constitution": 3,
+            "intelligence": -2,
+            "wisdom": 0,
+            "charisma": 0
+        }      
+    }, 
+    {
+        "model": "character.Character",
+        "pk": 1010,
+        "fields": {
+            "avatar_id": 1010,
+            "name": "Dragon",
+            "is_pc": false,
+            "class_level": null,
+            "race": null,
+            "items": [],
+            "spells": [],
+            "hit_dice_current": 15,
+            "hit_points_total": 120, 
+            "hit_points_current": 120,
+            "armor_class": 18,
+            "strength": 4,
+            "dexterity": 2,
+            "constitution": 3,
+            "intelligence": 1,
+            "wisdom": 0,
+            "charisma": 2
+        }      
     }
-       
-
 ]
