@@ -6,18 +6,17 @@ from game_data.models import GameData
 
 class Character(models.Model):
     
-    game_id = models.ForeignKey(GameData, null=True, on_delete=models.SET_NULL)
+    ##def __init__(self,armor_class = 10):
+        ##self.armor_class = armor_class
 
+    class Meta:
+        abstract = True
+        ordering = ['id']
+    
     avatar_id = models.IntegerField()
 
     name = models.CharField(max_length=30)
-
-    is_pc = models.BooleanField()
     
-    class_level = models.ForeignKey(ClassLevel, null=True, on_delete=models.SET_NULL)
-    
-    race = models.ForeignKey(Race, null=True, on_delete=models.SET_NULL)
-
     items = models.ManyToManyField(Item)
 
     spells = models.ManyToManyField(Spell)
@@ -51,13 +50,13 @@ class Character(models.Model):
     passive_perception = models.IntegerField()
     '''
 
-    class Meta:
-        db_table = 'character'
+    
 
     '''
     Convert a Character instance to a dict (usefull for REST API's).  
     The standard model_to_dict() does not handle foreign key tables very well.
     '''
+    
     def to_dict(self):
         data = {}                           # create empty dict
         opts = self._meta                   # get the metadata options for this class
@@ -65,13 +64,13 @@ class Character(models.Model):
         # add each field value to the dict (including foreign-key sub classes, not just id's)
         for field in opts.concrete_fields:  
             value = field.value_from_object(self)
-            if field.name is 'class_level':
+            if field.name == 'class_level':
                 if value is None:
                     data[field.name] = None
                 else:
                     class_level = ClassLevel.objects.get(pk=value)
                     data[field.name] = model_to_dict(class_level)
-            elif field.name is 'race':
+            elif field.name == 'race':
                 if value is None:
                     data[field.name] = None
                 else:
@@ -87,3 +86,21 @@ class Character(models.Model):
                 object_list.append(model_to_dict(obj))
             data[field.name] = object_list
         return data
+
+class PC_Character(Character):
+    
+    game = models.ForeignKey(GameData, null=True, on_delete=models.SET_NULL)
+
+    class_level = models.ForeignKey(ClassLevel, null=True, on_delete=models.SET_NULL)
+    
+    race = models.ForeignKey(Race, null=True, on_delete=models.SET_NULL)
+
+    class Meta(Character.Meta):
+        db_table = 'pc_character'
+        
+
+class NPC_Character(Character):
+    pass
+
+    class Meta(Character.Meta):
+        db_table = 'npc_character'

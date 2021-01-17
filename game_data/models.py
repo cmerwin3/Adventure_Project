@@ -7,8 +7,8 @@ class GameData(models.Model):
 
     user_name = models.CharField(max_length=30)
     
-    pin = models.IntegerField()
-
+    password = models.CharField(max_length=30)
+    
     last_script_id = models.CharField(max_length=20)
 
     completed_script_ids = models.CharField(max_length=500)

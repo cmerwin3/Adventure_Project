@@ -1,14 +1,11 @@
 [
 
     {
-        "model": "character.Character",
-        "pk": 1001,
+        "model": "character.NPC_Character",
+        "pk": 1,
         "fields": {
-            "avatar_id": 1001,
+            "avatar_id": 101,
             "name": "Goblin",
-            "is_pc": false,
-            "class_level": null,
-            "race": null,
             "items": [8],
             "spells": [],
             "hit_dice_current": 1,
@@ -24,14 +21,11 @@
         }
     },        
     {
-        "model": "character.Character",
-        "pk": 1002,
+        "model": "character.NPC_Character",
+        "pk": 2,
         "fields": {
-            "avatar_id": 1002,
+            "avatar_id": 102,
             "name": "Goblin Mage",
-            "is_pc": false,
-            "class_level": null,
-            "race": null,
             "items": [8],
             "spells": [2],
             "hit_dice_current": 1,
@@ -47,14 +41,11 @@
         }      
     },
     {
-        "model": "character.Character",
-        "pk": 1003,
+        "model": "character.NPC_Character",
+        "pk": 3,
         "fields": {
-            "avatar_id": 1003,
+            "avatar_id": 103,
             "name": "Orc",
-            "is_pc": false,
-            "class_level": null,
-            "race": null,
             "items": [3],
             "spells": [],
             "hit_dice_current": 2,
@@ -70,14 +61,11 @@
         }      
     }, 
     {
-        "model": "character.Character",
-        "pk": 1010,
+        "model": "character.NPC_Character",
+        "pk": 4,
         "fields": {
-            "avatar_id": 1010,
+            "avatar_id": 104,
             "name": "Dragon",
-            "is_pc": false,
-            "class_level": null,
-            "race": null,
             "items": [],
             "spells": [],
             "hit_dice_current": 15,

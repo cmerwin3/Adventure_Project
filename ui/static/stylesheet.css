@@ -251,3 +251,44 @@ div.loading_spinner img {
     width:120px;
     height:120px;
 }
+
+
+
+/***
+Login and Regestration
+***/
+html.login {
+    height: 100%;
+    margin: 0;
+}
+
+body.login{
+    height: 100%;
+    margin: 0;
+    background-image: url("/static/images/background-town.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+div.login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /*
+    height: 100%;
+    margin:auto;
+    width: 30%;
+    */
+
+    border: 3px solid Black;
+    padding: 10px;
+    background: rgba(128, 128, 128, 0.8);
+}
+
+.login_btn {
+    padding: 5px;
+}

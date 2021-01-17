@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="login">
+<head>
+    <title>Adventure Project Login - by Cameron Merwin</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
+</head>
+
+<body class="login">
+    <div class="login">
+        
+        <a href="/register"> Start New Game</a> Or <br/>
+        
+        {{error_message}}
+        <form action="/login/" method="POST">
+            {% csrf_token %}
+            <label for="user_name">Player Name:</label>
+            <input type="text" id="user_name" name="user_name" minlength=3><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" minlength=3><br><br>
+            
+            <input type="submit" value="Login" class="login_btn">
+
+          </form>
+    </div>
+</body>
+</html>

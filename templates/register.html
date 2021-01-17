@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="login">
+<head>
+    <title>Adventure Project New Game  - by Cameron Merwin</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
+</head>
+
+<body class="login">
+    <div class="login">
+        <h1>Player Registration</h1>
+        {{error_message}}
+        <form action="/register/" method="POST">
+            {% csrf_token %}
+            <label for="user_name">Player Name:</label>
+            <input type="text" id="user_name" name="user_name"><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password"><br><br>
+            
+            <input type="submit" value="Create New Game" class="login_btn">
+
+          </form>
+    </div>
+</body>
+</html>
