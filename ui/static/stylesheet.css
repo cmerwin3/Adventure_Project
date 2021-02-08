@@ -68,6 +68,39 @@ h2 {    /* sub title */
     padding: 18px 10px 10px 10px;
     vertical-align: bottom;
 }
+div.user_info {
+    float: right;
+    font-size: 14px; 
+    color: black;
+    padding: 12px 12px 0px 0px;
+    vertical-align: text-top;
+}
+
+div.user_info img {
+    width:20px;
+    height:20px;
+    vertical-align: middle;
+}
+div.user_info:hover .user_info_tooltip {
+    visibility: visible;
+}
+div.user_info .user_info_tooltip {
+    visibility: hidden;
+    display: block;
+    float: right;
+
+    background-color: #9fb5e2;
+    color: black;
+    text-align: right;  /* left */
+    font-size: 14px; 
+    font-weight: normal;
+    font-style: normal;
+    padding: 5px 5px;
+    border: 2px solid black;
+    position: absolute;
+    z-index: 1;
+}
+
 
 /**** 
  Character Panel in center of display
@@ -255,7 +288,7 @@ div.loading_spinner img {
 
 
 /***
-Login and Regestration
+ Login and Registration
 ***/
 html.login {
     height: 100%;
@@ -277,16 +310,20 @@ div.login{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /*
-    height: 100%;
-    margin:auto;
-    width: 30%;
-    */
-
     border: 3px solid Black;
     padding: 10px;
-    background: rgba(128, 128, 128, 0.8);
+    background: rgba(128, 128, 128, 0.9);
+}
+
+span.login_title {
+    font-size: 20px; 
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+span.login_error {
+    color: rgb(243, 179, 179);
 }
 
 .login_btn {

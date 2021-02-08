@@ -10,7 +10,14 @@
 </head>
 <body>
     <div class="title_panel">
-        <h1>Adventure Project</h1><h2>by Cameron Merwin</h2>
+        <h1>Adventure Project</h1><h2>by Cameron Merwin</h2> 
+        <div class="user_info">
+            <img src="/static/images/dropdown-menu.png"/>
+            Logged in as {{ request.session.user_name }}
+            <div class="user_info_tooltip">
+                <a href="/logout/">Logout</a>
+            </div>
+        </div>
     </div>
     <div class="character_panel">
         <table class="characters_left">

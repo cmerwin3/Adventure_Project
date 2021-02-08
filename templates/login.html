@@ -7,22 +7,32 @@
 </head>
 
 <body class="login">
+    <div class="title_panel">
+        <h1>Adventure Project</h1><h2>by Cameron Merwin</h2>
+    </div>
     <div class="login">
-        
-        <a href="/register"> Start New Game</a> Or <br/>
-        
-        {{error_message}}
+        <span class="login_title">Player Login</span><br/><br/>
+        <span class="login_error">{{error_message}}</span>
         <form action="/login/" method="POST">
             {% csrf_token %}
-            <label for="user_name">Player Name:</label>
-            <input type="text" id="user_name" name="user_name" minlength=3><br><br>
-            
-            <label for="password">Password:</label>
-            <input type="text" id="password" name="password" minlength=3><br><br>
-            
-            <input type="submit" value="Login" class="login_btn">
-
-          </form>
+            <table>
+                <tr>
+                    <td>Player Name:</td>
+                    <td><input type="text" id="user_name" name="user_name" minlength="3" required></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" id="password" name="password" minlength="3" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Login" class="login_btn"></td>
+                </tr>
+            </table>
+        </form>
+        <br/>
+        Or <input type="submit" value="Start New Game" class="login_btn"
+                onclick="window.location.href='/register/'">
     </div>
 </body>
 </html>

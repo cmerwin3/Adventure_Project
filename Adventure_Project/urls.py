@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ui_views.home , name='main-page'),
     path('login/', ui_views.login , name='login'),
+    path('logout/', ui_views.logout , name='logout'),
     path('register/', ui_views.register , name='register'),
     path('pc_character/<int:character_id>/', character_views.show_pc_character, name='view-pc-char'),
     path('npc_character/<int:character_id>/', character_views.show_npc_character, name='view-npc-char'),
