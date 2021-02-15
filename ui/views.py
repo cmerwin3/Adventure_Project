@@ -76,7 +76,16 @@ def generate_party(game):
     generate_party_member(game, 4)
 
 def generate_party_member(game, pk):
-    pc = PC_Character.objects.get(pk=pk)
+    pc = PC_Character.objects.get(pk=pk) 
+    # Take the list of items and spells from a character and remember them as a list for the new save file.
+    items = pc.items.all()
+    spells = pc.spells.all()
+    # Clear id to force the next available line in the database to save as a new id.
     pc.id = None 
     pc.game = game
+    pc.save()
+
+    # Ensure items and spells for the ManytoMany relationship are saved in the new record.
+    pc.items.add(*items)
+    pc.spells.add(*spells)
     pc.save()

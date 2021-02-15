@@ -29,9 +29,11 @@ urlpatterns = [
     path('register/', ui_views.register , name='register'),
     path('pc_character/<int:character_id>/', character_views.show_pc_character, name='view-pc-char'),
     path('npc_character/<int:character_id>/', character_views.show_npc_character, name='view-npc-char'),
-    path('combat/', combat_views.do_combat, name='combat'),
     path('combat/init/', combat_views.init_combat, name='init-combat'),
+    path('combat/turn/', combat_views.init_turn, name='init_turn'),
+    path('combat/positions', combat_views.get_positions, name='combat-positions'),
+    path('combat/attack', combat_views.do_attack, name='combat-attack'),
     path('script/', storyboard_views.get_script, name='get-script'), 
-    path('script/<script_id>', storyboard_views.get_script, name='get-script_id') 
-
+    path('script/<script_id>', storyboard_views.get_script, name='get-script_id'),
+    path('script/<script_id>/<response_id>', storyboard_views.handle_response, name='handle_response')
 ]   

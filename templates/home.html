@@ -21,7 +21,7 @@
     </div>
     <div class="character_panel">
         <table class="characters_left">
-            <tr class="pc_character_row">
+            <tr id="pc_character_row">
                 
                 <td class="character">
                     <img src="/static/images/character-1.png"/><br/>
@@ -57,7 +57,7 @@
             </tr>
         </table>
         <table class="characters_right">
-            <tr>
+            <tr id="npc_character_row">
                 <td class="character">
                     <img src="/static/images/npc-101.png"/><br/>
                     Goblin
@@ -71,21 +71,31 @@
     </div>
     <div class="dialogue_panel">
         <div class="script_display">
-            <!-- <p><b>Current Turn: {{name}}</b></p>-->
-            <p class="script" id="prompt">You are in an open field... You see a creature...  He asks "What are you doing here?"</p>
+            <p id="prompt">prompt...</p>
             <table class="response_table">
                 <tr>
-                    <td><a href="#"  class="response_btn">A:</a><span class="response">Ignore him and continue walking.</span></td>
-                    <td><a href="#" class="response_btn">B:</a><span class="response">Ask: "Do you have the golden key?"</span></td>
+                    <td id="response_0">
+                        <button onclick="">A</button>response...
+                    </td>
+                    <td id="response_1">
+                    </td>
                 </tr>
                 <tr>
-                    <td><button onclick="javascript:initiate_combat_mode();">C:</button>
-                        <span class="response">Attack the creature.</span></td>
-                    <td></td>
+                    <td id="response_2">
+                    </td>
+                    <td id="response_3">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="response_4">
+                    </td>
+                    <td id="response_5">
+                    </td>
                 </tr>
             </table>
         </div>
         <div class="combat_display">
+            <!-- <p><b>Current Turn: {{name}}</b></p>-->
             <div class="combat_status_bar">
                 Here is the status...
             </div>

@@ -4,7 +4,6 @@ The Views for a Character
 
 from django.shortcuts import render
 from django.http import Http404
-##from .models.Character import PC_Character, NPC_Character
 from .models import PC_Character, NPC_Character
 from django.http import JsonResponse
 from django.forms.models import model_to_dict

@@ -8,3 +8,9 @@ def get_script(request, script_id=None):
     data = service.get_script(request, game_id, script_id)
    
     return JsonResponse(data, json_dumps_params={'indent': 2})
+
+def handle_response(request, script_id, response_id):
+    game_id = request.session['game_id']
+    data = service.handle_response(request, game_id, script_id, response_id)
+   
+    return JsonResponse(data, json_dumps_params={'indent': 2})

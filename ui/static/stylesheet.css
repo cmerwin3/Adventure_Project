@@ -13,20 +13,19 @@ body {
     font-family: Palatino, Garamond, Verdana, sans-serif;
     font-size: 14px; 
 */
-    font-family: Times, Garamond, Verdana, sans-serif;
-    font-size: 16px; 
+    font-family: Georgia, Garamond, Times, Verdana, sans-serif;
+    font-size: 15px; 
     color: white;
     text-shadow: 1px 1px 1px gray;
-
 }
 button {
     background-color: lightgray;
     border: 1px solid darkgray;
     border-radius: 10px;
     color: black;
-    font-family: Bookman, Garamond, Verdana, sans-serif;
-    font-size: 18px; 
-    padding: 10px 10px;
+    font-family: Georgia, Garamond, Times, Verdana, sans-serif;
+    font-size: 18px;
+    padding: 8px 15px;
     text-align: left;
     text-decoration: none;
     display: inline-block;
@@ -147,8 +146,6 @@ td.character:hover .character-tooltip {
 }
 div.character-tooltip {
     visibility: hidden;
-    width: 120px;
-    height: 150px;
     background-color: #1a2e57;
     color: lightgray;
     text-align: left;
@@ -185,39 +182,12 @@ div.script_display {
     position: absolute;
     height: 100%;
     width: 100%;
-}
-p.script {
-    font-family: Times, Garamond, Verdana, sans-serif;
-    font-size: 16px; 
-    color: white;
-    text-shadow: 1px 1px 1px black;
-    padding: 10px;
+    padding: 20px;
 }
 table.response_table {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     width: 100%;
-}
-a.response_btn {
-    background-color: lightgray;
-    border: 1px solid darkgray;
-    border-radius: 10px;
-    color: black;
-    font-family: Bookman, Garamond, Verdana, sans-serif;
-    font-size: 18px; 
-    padding: 10px 10px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 10px;
-    cursor: pointer;
-    opacity: 1;
-}
-span.response {
-    font-family: Bookman, Garamond, Verdana, sans-serif;
-    font-size: 18px; 
-    color: white;
-    text-shadow: 1px 1px 2px black;
 }
 
 

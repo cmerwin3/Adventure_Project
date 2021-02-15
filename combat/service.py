@@ -53,59 +53,106 @@ def sortfunc(entry):
      return entry['initiative']
 
 
+def init_turn(position_list, turn_order_list, current_turn):
+    if turn_order_list[current_turn] <= 3 : 
+        results = {}
+        results['is_pc'] = True
+        results['current_turn'] = current_turn 
+    else:
+        results, current_turn = handle_npc_attack(position_list, turn_order_list, current_turn)
+        results['is_pc'] = False
+       
+    return results, current_turn
 
-def attack(source_id, item_id, destination_id):
-    
-    source = Character.objects.get(pk = source_id)
-    
-    destination = Character.objects.get(pk = destination_id)
-    item = Item.objects.get(pk = item_id)
 
-    #natural = roll()
+def handle_pc_attack(destination_index, position_list, turn_order_list, current_turn):
+    source = position_list[turn_order_list[current_turn]]
+    destination = position_list[destination_index]
+    print('destination_index='+ str(destination_index))
+    print('source=' + str(source))
+   
+    item = source['items'][0]
+    natural, damage = attack(source, item, destination)
+    
+    results = {}
+    if damage == 0:
+        results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
+    else:
+        results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
+    results['recipient_ids'] = [destination_index]
+    results['damage'] = [damage]
+    results['natural'] = [natural]
+    current_turn = increment_turn(turn_order_list,current_turn)
+    results['current_turn'] = current_turn
+
+    return results, current_turn
+
+
+def handle_npc_attack(position_list, turn_order_list, current_turn):
+    source = position_list[turn_order_list[current_turn]]
+    destination_index = dice.roll(4) - 1
+    destination = position_list[destination_index]
+    item = source['items'][0]
+    natural, damage = attack(source, item, destination)
+    
+    results = {}
+    if damage == 0:
+        results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
+    else:
+        results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
+    results['recipient_ids'] = [destination_index]
+    results['damage'] = [damage]
+    results['natural'] = [natural]
+    current_turn = increment_turn(turn_order_list,current_turn)
+    results['current_turn'] = current_turn
+
+    return results, current_turn
+
+
+
+
+    
+def increment_turn(turn_order_list,current_turn):
+    current_turn += 1
+    if current_turn == len(turn_order_list):
+        current_turn = 0
+    return current_turn
+          
+        
+
+
+
+
+def attack(source, item, destination):
+    #Roll D20
     natural = dice.roll()
     # TODO Natrual 1
     # TODO Natrual 20
     
-
+    #Str or Dex
     modifier = get_modifier(source,item)
     
+    #Total to hit
     result = modifier + natural
-    # TODO finesse
     
-    
-    armor_class = destination.armor_class
+    armor_class = destination['armor_class']
 
     
     if result >= armor_class:
-        damage = get_damage(item.damage_dice, modifier)
-        hit_points = get_hit_points(damage, destination.hit_points_current)
-        save_hit_points(hit_points, destination)
+        damage = dice.roll(item['damage_dice']) + modifier
+        hit_points =  destination['hit_points_current'] - damage
+        if hit_points < 0:
+            hit_points = 0
+        destination['hit_points_current'] = hit_points    
     else:
-        damage = None
+        damage = 0
     
-    return natural, modifier, damage
-
-def get_damage(item_damage_dice, modifier):
-    damage = dice.roll(item_damage_dice) + modifier
-    return damage
-
-
-def get_hit_points(damage, destination_hit_points_current):
-    hit_points =  destination_hit_points_current - damage
-    if hit_points < 0:
-        hit_points = 0
-    return hit_points
-
-
-def save_hit_points(hit_points, destination):
-    #TODO  save currnet hitpoints to session not database
-    destination.hit_points_current = hit_points
-    destination.save()
-
+    return natural, damage
 
 def get_modifier(source, item):
-    if item.has_finesse is True:
-        modifier = max(source.strength, source.dexterity)
+    print('item2 =' + str(item))
+    if item['has_finesse'] is True:
+        modifier = max(source['strength'], source['dexterity'])
     else:
-        modifier = source.strength
+        modifier = source['strength']
     return modifier
