@@ -12,6 +12,7 @@ function load_script(script_id) {
         script_id = "";
 
     var url = "script/" + script_id;
+    
     $.getJSON( url )
             .done(function( script_json ) {
                 console.log( "Script JSON loaded: " + script_json.script_id );
@@ -28,7 +29,7 @@ function load_script(script_id) {
 }
 
 function update_background(script_json) {
-    var image_url = "/static/images/" + script_json.background_image;
+    var image_url = "/static/images/" + script_json.background;
     $("div.character_panel").css("background-image", "url('" + image_url + "')");
 }
 
@@ -65,8 +66,6 @@ function update_dialogue_panel(script_json) {
  * @param {*} response_id 
  */
 function handle_response(response_id) {
-    alert("response" + response_id + " was clicked.");
-    
     var url = "script/" + current_script_id + "/" + response_id;
     $.getJSON( url )
             .done(function( response_json ) {

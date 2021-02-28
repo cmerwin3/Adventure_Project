@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from game_data.models import GameData
 from character.models import PC_Character
 
+
 def home(request):
     game_id = request.session.get('game_id')
     user_name = request.session.get('user_name')
@@ -59,9 +60,9 @@ def register(request):
 
 
 def logout(request):
-    if request.session['game_id'] is not None:
+    if 'game_id' in request.session:
         del request.session['game_id']
-    if request.session['user_name'] is not None:
+    if 'user_name' in request.session:
         del request.session['user_name']
     return render(request, 'login.html')
 

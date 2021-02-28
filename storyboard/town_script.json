@@ -1,0 +1,59 @@
+[
+    {
+        "script_id": "town",
+        "background": "background-town.jpg",
+        "npc_list":[],
+        "prompt": "You enter the gates of the town.  You see a bishop at the church",
+        "responses": 
+        [
+            {
+                "response": "Talk to the bishop.",
+                "next_script": "town.bishop"
+            },
+            {
+                "response": "Keep on walking.",
+                "next_script": "town.xxx"
+            }
+        ]
+    },
+    {
+        "script_id": "town.bishop",
+        "background": "background-town.jpg",
+        "npc_list": [ "Goblin", "Goblin", "Orc" ],
+        "prompt": "You aproach the bishop and he asks if you have the key.",
+        "responses": 
+        [
+            {
+                "response": "Ignore him and continue walking.",
+                "next_script": "town"
+            },
+            {
+                "response": "You offer him the key.",
+                "required_item": "Golden Key", 
+                "show_if_missing": false,
+                "narration": "The bishop uses your key and unlocks the crypt...",
+                "next_script": "town.crypt"
+            }
+        ]
+    },
+    {
+        "script_id": "town.bishop.unlocked",
+        "background": "",
+        "npc_list":[],
+        "prompt": "You walk down into the crypt. You see a strange stone with carvings on it",
+        "responses": 
+        [
+            {
+                "response": "Touch the stone",
+                "next_script": "combat.crypt"
+            },
+            {
+                "response": "You offer him the key.",
+                "required_item": "Golden Key", 
+                "show_if_missing": false,
+                "next_script": "town.bishop.unlocked"
+            }
+        ]
+    }
+]
+

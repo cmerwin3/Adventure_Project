@@ -1,0 +1,15 @@
+[
+    {
+        "script_id": "intro",
+        "background": "background-town.jpg",
+        "npc_list":[],
+        "prompt": "Welcome to the Adventure Project",
+        "responses": 
+        [
+            {
+                "response": "Enter Game",
+                "next_script": "town"
+            }
+        ]
+    }
+]
