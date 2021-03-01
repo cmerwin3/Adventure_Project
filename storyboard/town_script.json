@@ -9,10 +9,6 @@
             {
                 "response": "Talk to the bishop.",
                 "next_script": "town.bishop"
-            },
-            {
-                "response": "Keep on walking.",
-                "next_script": "town.xxx"
             }
         ]
     },
@@ -28,16 +24,41 @@
                 "next_script": "town"
             },
             {
+                "response": "Test.",
+                "next_script": "town.bishop.test"
+            },
+            {
                 "response": "You offer him the key.",
                 "required_item": "Golden Key", 
                 "show_if_missing": false,
                 "narration": "The bishop uses your key and unlocks the crypt...",
                 "next_script": "town.crypt"
+            },
+            {
+                "response": "Punch him.",
+                "next_script": "town",
+                "combat_mode": {
+                    "background": "background-mine.jpg",
+                    "npc_list": [ "Goblin", "Goblin", "Orc" ]
+                }
             }
         ]
     },
     {
-        "script_id": "town.bishop.unlocked",
+        "script_id": "town.bishop.test",
+        "background": "",
+        "npc_list": [],
+        "prompt": "You aproach the bishop and he asks if you have the key.",
+        "responses": 
+        [
+            {
+                "response": "Pass by and continue.",
+                "next_script": "town"
+            }
+        ]
+    },
+    {
+        "script_id": "town.crypt",
         "background": "",
         "npc_list":[],
         "prompt": "You walk down into the crypt. You see a strange stone with carvings on it",
@@ -45,13 +66,13 @@
         [
             {
                 "response": "Touch the stone",
-                "next_script": "combat.crypt"
+                "next_script": "town"
             },
             {
                 "response": "You offer him the key.",
                 "required_item": "Golden Key", 
                 "show_if_missing": false,
-                "next_script": "town.bishop.unlocked"
+                "next_script": "town.bishop"
             }
         ]
     }

@@ -28,6 +28,21 @@ function load_script(script_id) {
             });
 }
 
+function load_combat() {
+    var url = "combat/init/";
+    
+    $.getJSON( url )
+            .done(function( combat_json ) {
+                console.log( "Combat JSON loaded");
+                initiate_combat_mode();
+            })
+            .fail(function( jqxhr, textStatus, error ) {
+                var err = textStatus + ", " + error;
+                console.log( "Request Failed: " + err );
+            });
+}
+
+
 function update_background(script_json) {
     var image_url = "/static/images/" + script_json.background;
     $("div.character_panel").css("background-image", "url('" + image_url + "')");
@@ -70,8 +85,11 @@ function handle_response(response_id) {
     $.getJSON( url )
             .done(function( response_json ) {
                 console.log( "Response JSON loaded: " + response_json );
-                if (response_json.next_script != null) {
-                    load_script(response_json.next_script)
+                if (response_json.combat_mode != null) {
+                    load_combat();
+                }
+                else if (response_json.next_script != null) {
+                    load_script(response_json.next_script);
                 }
             })
             .fail(function( jqxhr, textStatus, error ) {
@@ -82,8 +100,6 @@ function handle_response(response_id) {
     
     
     
-    // TODO - call rest api to tell server what response was selected
-    //      - based on the server's json response:
-    //          A) start combat mode  
+    
 }
 

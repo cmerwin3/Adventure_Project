@@ -7,12 +7,12 @@ def get_script(request, game_id, script_id):
     if not script_id:
         script_id = "intro"
     script = models.get_script(script_id)
-    script['position_list'] = generate_possition_list(game_id, script)
+    script['position_list'] = generate_position_list(game_id, script)
     return script
 
 
 
-def generate_possition_list(game_id, script):
+def generate_position_list(game_id, script):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
     print('PC_Character='+ str(player_character_list)) #shows results to console
     non_player_character_list = []
@@ -32,11 +32,18 @@ def generate_possition_list(game_id, script):
     return position_list
 
 def handle_response(request, game_id, script_id, response_id):
-    data = {} 
-
     script = models.get_script(script_id)
     response_list = script['responses']
     response = response_list[int(response_id)]
+    
+    data = {} 
+    if 'combat_mode' in response: 
+        combat_mode = response['combat_mode']
+        if len(combat_mode['npc_list']) == 0:
+            combat_mode['npc_list'] = script['npc_list']
+        if len(combat_mode['background']) == 0:
+            combat_mode['background'] = script['background']
+        data['combat_mode'] = response['combat_mode']
     data['next_script'] = response['next_script']
     
     return data

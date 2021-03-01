@@ -10,13 +10,12 @@ from character.models import Character
 #import dice
 from dice import models as dice
 
-def init_combat(game_id):
-    background_image, npc_id_list = storyboard_service.init_combat(1) #TODO storyboard service 
+def init_combat(game_id, npc_list):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
     print('PC_Character='+ str(player_character_list)) #shows results to console
     non_player_character_list = []
-    for id in npc_id_list:
-        non_player_character_list.append(NPC_Character.objects.get(pk = id))
+    for name in npc_list:
+        non_player_character_list.append(NPC_Character.objects.filter(name = name).first())
 
     position_list = []
     #position 0-3 is always PC characters
@@ -29,7 +28,7 @@ def init_combat(game_id):
     
     turn_order_list = generate_turn_order(position_list)
 
-    return position_list, turn_order_list, background_image
+    return position_list, turn_order_list
 
 
 

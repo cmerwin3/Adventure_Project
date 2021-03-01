@@ -12,7 +12,8 @@ from dice import models as dice
 def init_combat(request): 
     game_id = request.session['game_id']
     print('game_id='+ str(game_id))
-    position_list, turn_order_list, background_image = service.init_combat(game_id)
+    combat_mode = request.session['combat_mode'] 
+    position_list, turn_order_list = service.init_combat(game_id, combat_mode['npc_list'])
     
     request.session['position_list'] = position_list
     request.session['turn_order_list'] = turn_order_list
@@ -22,7 +23,7 @@ def init_combat(request):
     results = {}
     results['position_list'] = position_list
     results['turn_order_list'] = turn_order_list
-    results['background'] = 'background-cavern.jpg'
+    results['background'] = combat_mode['background']
 
     return JsonResponse(results, json_dumps_params={'indent': 2})
 

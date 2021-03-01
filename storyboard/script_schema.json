@@ -23,7 +23,24 @@
                     "type": "object",
                     "properties": {
                         "response": { "type": "string"},
-                        "next_script": { "type": "string"},
+                        "next_script": { 
+                            "type": "string",
+                            "enum": [""]
+                        },
+                        "combat_mode": { 
+                            "type": "object",
+                            "properties": {
+                                "npc_list": {
+                                    "type": "array",
+                                    "items": { 
+                                        "type": "string",
+                                        "enum": [ "Goblin", "Orc" ]
+                                     },
+                                    "maxItems": 6
+                                },
+                                "background": { "type": "string"}
+                            }
+                        },
                         "action": {
                             "type": "string",
                             "enum": [ "get_item", "use_item" ]

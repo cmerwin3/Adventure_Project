@@ -8,8 +8,9 @@ import json
 from jsonschema import validate
 
 
+
 # array to hold all scripts loaded in
-scripts = []
+scripts = {}
 
 
 def load_scripts():
@@ -26,6 +27,7 @@ def load_scripts():
 
     # list all files in current directory & look for each script json file
     file_list = os.listdir(current_dir)
+    script_list = []
     for filename in file_list:
         if filename.endswith('_script.json'):
 
@@ -35,16 +37,68 @@ def load_scripts():
             with open(filepath) as file_obj:
                 script_data = json.load(file_obj)
 
-            # run validation to make sure script json fields are correct.  
-            validate(script_data, schema)
-
             # add each script item to global scripts list
-            scripts.extend(script_data)
+            script_list.extend(script_data)
+
+    # gather a list of all script ids
+    script_id_list = []
+    for script in script_list:
+        script_id = script['script_id']
+        script_id_list.append(script_id)
+
+    # dynamically update schema with script_id to validate that each script is properly mapped to another script
+    schema["items"]["properties"]["responses"]["items"]["properties"]["next_script"]["enum"] = script_id_list
+    
+    # run validation to make sure script json fields are correct.  
+    validate(script_list, schema)
+
+    
+
+    # convert script array into a global dictionary for ease of use based on script id
+    for script_data in script_list:
+        script_id = script_data['script_id']
+        scripts[script_id] = script_data
+
+    # ensure the child scripts have the npc_list and the background of the parent
+    cascade_script_values('background')
+    cascade_script_values('npc_list')
+    
+def cascade_script_values(field_name):
+    script_id_list = scripts.keys()
+    for script_id in script_id_list:
+        script = scripts[script_id]
+        if len(script[field_name]) > 0:
+            continue
+        
+        names = script_id.split(".")
+        field_value = find_parent_field(field_name, names, len(names))
+        
+        if field_value is not None:
+            script[field_name] = field_value
+
+
+def find_parent_field(field_name, names, max_index):
+    if max_index <= 1:
+        return None
+    parent_names = names[0:max_index-1]
+    print('parent_names=' + str(parent_names))
+    new_script_id = ".".join(parent_names)
+    print('new_script_id=' + str(new_script_id))
+
+    script = scripts[new_script_id]
+    if len(script[field_name]) > 0:
+        return script[field_name]
+
+    if max_index == 0:
+        return None
+    else: 
+        return find_parent_field(field_name, names, max_index-1)
+
+
+
 
 def get_script(script_id):
     print('loading script:' + script_id)
-    for script in scripts:
-        if script['script_id']== script_id: 
-            return script
-    print('found script:' + str(script))
-    return None
+    return scripts[script_id]
+    
+    
