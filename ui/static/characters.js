@@ -1,9 +1,9 @@
     
     
-function update_character_positions(script_json) {
+function update_character_positions(position_list) {
     var new_row = "";
     for(var index=0; index<=3; index++) {
-        character_sheet = script_json.position_list[index];
+        character_sheet = position_list[index];
         
         // create new character <td> html element string and plug in the values
         var new_elem = `
@@ -28,8 +28,8 @@ function update_character_positions(script_json) {
     $("#pc_character_row").html(new_row);
 
     new_row = "";
-    for(var index=4; index < script_json.position_list.length; index++) {
-        character_sheet = script_json.position_list[index];
+    for(var index=4; index < position_list.length; index++) {
+        character_sheet = position_list[index];
         
         // create new character <td> html element string and plug in the values
         var new_elem = `
@@ -67,51 +67,6 @@ function display_character_health() {
     }
     character_element.style["border-color"]=color;
     character_element.style["opacity"]=opacity;
-}
-
-function initiate_combat_mode() {
-    // hide script display and all characters (fade out)
-    $(".script_display").fadeOut(2000);
-    $(".character").fadeOut(2000);
-
-    // display loading div with spinner and "Entering Combat..." 
-    $(".loading_spinner").fadeIn(2000, function() {
-        // change background image (fade out/in so the change isn't too jarring)
-        $(".character_panel").delay(2000).fadeOut("fast", function() {
-            $(".character_panel").css("background-image", "url('/static/images/background_combat.jpg')");
-            $(".character_panel").fadeIn("fast", function() {
-                // display empty turn list box
-                $(".combat_display").delay(2000).fadeIn("slow", function() {
-                    // add in new characters sequentially to turn list and character panel
-                    $(".character").delay(2000).fadeIn(2000, function() {
-                        $(".loading_spinner").fadeOut("fast");
-                    });
-                });
-            });
-        });
-    });
-
-
-    // hide script display and all characters (fade out)
-    //$(".script_display").fadeOut(2000);
-    //$(".character").fadeOut(2000);
-
-    // display spinner with "Entering Combat..." on color display div
-    //$(".color_display").show();
-    //$(".loading_spinner").fadeIn();
-
-    // change background image
-    //$(".character_panel").css("background-image", "url('/static/images/background_combat.jpg')");
-
-    // display empty turn list box
-    //$(".combat_display").fadeIn("slow");
-
-    // add in new characters sequentially to turn list and character panel
-
-    // remove spinner
-
-    // send server 'ready for combat' and reponse will be first turn 
-
 }
 
 

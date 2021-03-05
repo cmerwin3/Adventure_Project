@@ -216,14 +216,23 @@ table.combat_buttons {
     table-layout: fixed;
     padding: 20px 20px;
 }
-div.combat_turns {
+div.combat_turn_list {
     position: absolute;
     top: 0px;
     right: 0px;
     width: 20%;
     height: 100%;
     border-left: 5px solid #33328b;
-    padding: 20px;
+    padding: 15px;
+}
+table.turn_list td {
+    vertical-align: text-top;
+}
+
+table.turn_list td img {
+    width:25px;
+    height:15px;
+    vertical-align: middle;
 }
 
 /**** 

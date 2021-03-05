@@ -5,8 +5,9 @@
     <title>Adventure Project - by Cameron Merwin</title>
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'characters.js' %}"></script>
     <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'characters.js' %}"></script>
+    <script src="{% static 'combat.js' %}"></script>
 </head>
 <body>
     <div class="title_panel">
@@ -95,28 +96,48 @@
             </table>
         </div>
         <div class="combat_display">
-            <!-- <p><b>Current Turn: {{name}}</b></p>-->
-            <div class="combat_status_bar">
-                Here is the status...
+            <div>
+                <div class="combat_frame" id="combat_action_frame">
+                    <div class="combat_status_bar">
+                        <b><i>In Combat</i></b> - Select an action below
+                    </div>
+                    <table class="combat_buttons">
+                        <tr>
+                            <td><button onclick="handle_attack()">Attack</button></td>
+                            <td><button onclick="handle_defend()">Defend</button></td>
+                        </tr>
+                        <tr>
+                            <td><button onclick="handle_spell()">Spell</button></td>
+                            <td><button onclick="handle_run()">Run</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="combat_frame" id="combat_spell_frame">
+                    <!-- TODO -->
+                </div>
+                <div class="combat_frame" id="combat_narration_frame">
+                    <div class="combat_status_bar" id="combat_narration_frame_message">
+                        text here
+                    </div>
+                </div>
             </div>
-            <table class="combat_buttons">
-                <tr>
-                    <td><button onclick="javascript:void(0);">Attack</button></td>
-                    <td><button onclick="javascript:void(0);">Spell</button></td>
-                    <td><button onclick="javascript:void(0);">Run</button></td>
-                </tr>
-                <tr>
-                    <td><button onclick="javascript:void(0);">Defend</button></td>
-                    <td><button onclick="javascript:void(0);">Item</button></td>
-                    <td></td>
-                </tr>
-            </table>
-            <div class="combat_turns">
-                <b>Next Turns:</b><br/><br/>
-                1) Cameron<br/>
-                2) Charlie<br/>
-                3) The Orc<br/>
-                4) Smaug<br/>
+            <!-- <p><b>Current Turn: {{name}}</b></p>-->
+            <div class="combat_turn_list">
+                <b>Current Turn:</b><br/><br/>
+                <table class="turn_list" id="turn_list">
+                    <tr>
+                        <td id="turn_0"><img src="/static/images/turn-list-arrow.png"/></td><td>1. Cameron</td>
+                    </tr>
+                    <tr>
+                        <td></td><td>2. Charlie</td>
+                    </tr>
+                    <tr>
+                        <td></td><td>3. The Orc</td>
+                    </tr>
+                    <tr>
+                        <td></td><td>4. Smaug</td>
+                    </tr>
+                </table>
             </div>            
         </div>
     </div>

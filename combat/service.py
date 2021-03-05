@@ -57,18 +57,18 @@ def init_turn(position_list, turn_order_list, current_turn):
         results = {}
         results['is_pc'] = True
         results['current_turn'] = current_turn 
+        next_turn = current_turn
     else:
-        results, current_turn = handle_npc_attack(position_list, turn_order_list, current_turn)
+        results, next_turn = handle_npc_attack(position_list, turn_order_list, current_turn)
         results['is_pc'] = False
+        results['current_turn'] = current_turn 
        
-    return results, current_turn
+    return results, next_turn
 
 
 def handle_pc_attack(destination_index, position_list, turn_order_list, current_turn):
     source = position_list[turn_order_list[current_turn]]
     destination = position_list[destination_index]
-    print('destination_index='+ str(destination_index))
-    print('source=' + str(source))
    
     item = source['items'][0]
     natural, damage = attack(source, item, destination)
@@ -81,10 +81,9 @@ def handle_pc_attack(destination_index, position_list, turn_order_list, current_
     results['recipient_ids'] = [destination_index]
     results['damage'] = [damage]
     results['natural'] = [natural]
-    current_turn = increment_turn(turn_order_list,current_turn)
-    results['current_turn'] = current_turn
+    next_turn = increment_turn(turn_order_list,current_turn)
 
-    return results, current_turn
+    return results, next_turn
 
 
 def handle_npc_attack(position_list, turn_order_list, current_turn):
@@ -102,12 +101,9 @@ def handle_npc_attack(position_list, turn_order_list, current_turn):
     results['recipient_ids'] = [destination_index]
     results['damage'] = [damage]
     results['natural'] = [natural]
-    current_turn = increment_turn(turn_order_list,current_turn)
-    results['current_turn'] = current_turn
+    next_turn = increment_turn(turn_order_list,current_turn)
 
-    return results, current_turn
-
-
+    return results, next_turn
 
 
     
@@ -118,8 +114,6 @@ def increment_turn(turn_order_list,current_turn):
     return current_turn
           
         
-
-
 
 
 def attack(source, item, destination):
@@ -149,9 +143,9 @@ def attack(source, item, destination):
     return natural, damage
 
 def get_modifier(source, item):
-    print('item2 =' + str(item))
     if item['has_finesse'] is True:
         modifier = max(source['strength'], source['dexterity'])
     else:
         modifier = source['strength']
     return modifier
+    

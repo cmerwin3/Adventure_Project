@@ -1,12 +1,22 @@
 
-
+/**
+ * 
+ * At home page startup load the default script
+ * 
+ */
+// at home page startup load the default script
 $(document).ready(function() {
     load_script();
 });
 
 var current_script_id = null;
 
-
+/**
+ * 
+ * Load a script (prompt, responses, npc's, etc) into the home page
+ * 
+ * @param {string} script_id The specific script_id to load, if unspecified let server decide default 
+ */
 function load_script(script_id) {
     if (script_id == null)
         script_id = "";
@@ -17,24 +27,9 @@ function load_script(script_id) {
             .done(function( script_json ) {
                 console.log( "Script JSON loaded: " + script_json.script_id );
                 current_script_id = script_json.script_id
-                //TODO Naming convention to 'Panel_Component'
-                update_background(script_json);
+                update_background(script_json.background);
                 update_dialogue_panel(script_json);
-                update_character_positions(script_json);
-            })
-            .fail(function( jqxhr, textStatus, error ) {
-                var err = textStatus + ", " + error;
-                console.log( "Request Failed: " + err );
-            });
-}
-
-function load_combat() {
-    var url = "combat/init/";
-    
-    $.getJSON( url )
-            .done(function( combat_json ) {
-                console.log( "Combat JSON loaded");
-                initiate_combat_mode();
+                update_character_positions(script_json.position_list);
             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;
@@ -43,8 +38,8 @@ function load_combat() {
 }
 
 
-function update_background(script_json) {
-    var image_url = "/static/images/" + script_json.background;
+function update_background(background) {
+    var image_url = "/static/images/" + background;
     $("div.character_panel").css("background-image", "url('" + image_url + "')");
 }
 
@@ -72,13 +67,11 @@ function update_dialogue_panel(script_json) {
 }
 
 
-
-
 /**
  * 
  * Called when the user clicks a response button in the dialogue panel
  * 
- * @param {*} response_id 
+ * @param {int} response_id index for the response (0-based: 'A'=0, 'B'=1, etc.)
  */
 function handle_response(response_id) {
     var url = "script/" + current_script_id + "/" + response_id;
@@ -96,10 +89,5 @@ function handle_response(response_id) {
                 var err = textStatus + ", " + error;
                 console.log( "Request Failed: " + err );
             });
-    
-    
-    
-    
-    
 }
 

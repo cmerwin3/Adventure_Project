@@ -39,7 +39,8 @@
                                     "maxItems": 6
                                 },
                                 "background": { "type": "string"}
-                            }
+                            },
+                            "required": [ "npc_list", "background" ]
                         },
                         "action": {
                             "type": "string",

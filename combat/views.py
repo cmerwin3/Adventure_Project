@@ -31,9 +31,9 @@ def init_turn(request):
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']
     current_turn = request.session['current_turn']
-    results, current_turn = service.init_turn(position_list, turn_order_list, current_turn)
+    results, next_turn = service.init_turn(position_list, turn_order_list, current_turn)
     
-    request.session['current_turn'] = current_turn
+    request.session['current_turn'] = next_turn
     return JsonResponse(results, json_dumps_params={'indent': 2})
 
 
@@ -49,9 +49,9 @@ def do_attack(request):
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']
     current_turn = request.session['current_turn']
-    results, current_turn = service.handle_pc_attack(destination_index, position_list, turn_order_list, current_turn)
+    results, next_turn = service.handle_pc_attack(destination_index, position_list, turn_order_list, current_turn)
     
-    request.session['current_turn'] = current_turn
+    request.session['current_turn'] = next_turn
     return JsonResponse(results, json_dumps_params={'indent': 2})
     
 
