@@ -234,6 +234,11 @@ table.turn_list td img {
     height:15px;
     vertical-align: middle;
 }
+div.cancel_button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
 
 /**** 
  Dialogue Panel - Loading display with spinner

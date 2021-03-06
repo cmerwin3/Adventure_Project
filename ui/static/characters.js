@@ -1,5 +1,9 @@
     
-    
+// calback funtion for when an NPC is Clicked
+var npc_clicked_action = null
+
+
+
 function update_character_positions(position_list) {
     var new_row = "";
     for(var index=0; index<=3; index++) {
@@ -33,7 +37,7 @@ function update_character_positions(position_list) {
         
         // create new character <td> html element string and plug in the values
         var new_elem = `
-            <td class="character" id="char_${character_sheet.id}">
+            <td class="character" onclick="npc_clicked(${index})">
                 <img src="/static/images/npc-${character_sheet.avatar_id}.png"/><br/>
                 ${character_sheet.name}
             </td>
@@ -69,4 +73,12 @@ function display_character_health() {
     character_element.style["opacity"]=opacity;
 }
 
+function npc_clicked(position_index) {     
+    if (npc_clicked_action == null){
+        return;
+    } else {
+        npc_clicked_action(position_index);
+        npc_clicked_action = null;
+    }
+}
 

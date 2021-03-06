@@ -102,7 +102,7 @@ function display_current_turn_arrow(turn_order_list, current_turn_index) {
     }
 }
 
-function display_combat_frame(frame_type) {
+function display_combat_frame(frame_type, display_cancel = false) {
     // hide all frames
     $(".combat_frame").hide();
 
@@ -113,27 +113,41 @@ function display_combat_frame(frame_type) {
         $("#combat_spell_frame").show();
     } else if (frame_type == "combat_narration_frame") {
         $("#combat_narration_frame").show();
+        if (display_cancel == true) {
+            $(".cancel_button").show();
+        } else {
+            $(".cancel_button").hide();
+        }
+        
     }
 }
 
 function handle_attack() {
-    // TODO user must pick npc
-    var url = "combat/attack?destination_index=4";
-    $.getJSON( url )
-            .done(function( results_json ) {
-                console.log( "Attack JSON loaded");
-                display_combat_frame("combat_narration_frame");
-                // display narration message & wait a few seconds
-                $("#combat_narration_frame_message").html(results_json.narration);
-                console.log("pc-attack: A");
-                setTimeout(function() {
-                    console.log("pc-attack: B");
-                    handle_current_turn();
-                    console.log("pc-attack: C");
-                }, 5000);
-            })
-            .fail(function( jqxhr, textStatus, error ) {
-                var err = textStatus + ", " + error;
-                console.log( "Request Failed: " + err );
-            });
+    display_combat_frame("combat_narration_frame", true);
+    $("#combat_narration_frame_message").html("Select a target");
+    npc_clicked_action = function(position_index){
+        var url = "combat/attack?destination_index=" + position_index;
+        $.getJSON( url )
+                .done(function( results_json ) {
+                    console.log( "Attack JSON loaded");
+                    display_combat_frame("combat_narration_frame");
+                    // display narration message & wait a few seconds
+                    $("#combat_narration_frame_message").html(results_json.narration);
+                    console.log("pc-attack: A");
+                    setTimeout(function() {
+                        console.log("pc-attack: B");
+                        handle_current_turn();
+                        console.log("pc-attack: C");
+                    }, 5000);
+                })
+                .fail(function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                });
+    }
+}
+
+function handle_cancel(){
+    display_combat_frame("combat_action_frame");
+    npc_clicked_action = null;
 }
