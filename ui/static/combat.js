@@ -29,6 +29,8 @@ function initiate_combat_mode(combat_json) {
         // update new character position list (still hidden)
         update_character_positions(combat_json.position_list);
 
+        display_character_health(combat_json.position_list);
+
         // change background image (during fade out/in so the change isn't too jarring)
         update_background(combat_json.background);
 
@@ -61,8 +63,9 @@ function create_turn_list(combat_json) {
 }
 
 function handle_current_turn() {
-    var url = "combat/turn/";
+    display_character_health(saved_combat_json.position_list);
     
+    var url = "combat/turn/";
     $.getJSON( url )
             .done(function( turn_json ) {
                 console.log( "Turn JSON loaded");
@@ -125,7 +128,13 @@ function display_combat_frame(frame_type, display_cancel = false) {
 function handle_attack() {
     display_combat_frame("combat_narration_frame", true);
     $("#combat_narration_frame_message").html("Select a target");
+    //$("#char_1").style["border-color"]="white";
+    //$("#char_1").css("border-color", "red");
+
+    highlight_npc_characters(saved_combat_json.position_list);
     npc_clicked_action = function(position_index){
+        display_character_health(saved_combat_json.position_list);
+        highlight_npc_characters(saved_combat_json.position_list, position_index);
         var url = "combat/attack?destination_index=" + position_index;
         $.getJSON( url )
                 .done(function( results_json ) {
@@ -133,11 +142,8 @@ function handle_attack() {
                     display_combat_frame("combat_narration_frame");
                     // display narration message & wait a few seconds
                     $("#combat_narration_frame_message").html(results_json.narration);
-                    console.log("pc-attack: A");
                     setTimeout(function() {
-                        console.log("pc-attack: B");
                         handle_current_turn();
-                        console.log("pc-attack: C");
                     }, 5000);
                 })
                 .fail(function( jqxhr, textStatus, error ) {

@@ -81,9 +81,8 @@ def find_parent_field(field_name, names, max_index):
     if max_index <= 1:
         return None
     parent_names = names[0:max_index-1]
-    print('parent_names=' + str(parent_names))
     new_script_id = ".".join(parent_names)
-    print('new_script_id=' + str(new_script_id))
+    
 
     script = scripts[new_script_id]
     if len(script[field_name]) > 0:

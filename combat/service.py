@@ -12,7 +12,6 @@ from dice import models as dice
 
 def init_combat(game_id, npc_list):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
-    print('PC_Character='+ str(player_character_list)) #shows results to console
     non_player_character_list = []
     for name in npc_list:
         non_player_character_list.append(NPC_Character.objects.filter(name = name).first())
@@ -132,7 +131,7 @@ def attack(source, item, destination):
 
     
     if result >= armor_class:
-        damage = dice.roll(item['damage_dice']) + modifier
+        damage = dice.roll(item['damage_dice'])+ modifier
         hit_points =  destination['hit_points_current'] - damage
         if hit_points < 0:
             hit_points = 0

@@ -11,7 +11,7 @@ function update_character_positions(position_list) {
         
         // create new character <td> html element string and plug in the values
         var new_elem = `
-            <td class="character" id="char_${character_sheet.id}">
+            <td class="character" id="char_${index}">
                 <img src="/static/images/character-${character_sheet.avatar_id}.png"/><br/>
                 ${character_sheet.name}
                 <div class="character-tooltip">
@@ -37,7 +37,7 @@ function update_character_positions(position_list) {
         
         // create new character <td> html element string and plug in the values
         var new_elem = `
-            <td class="character" onclick="npc_clicked(${index})">
+            <td class="character" id="char_${index}" onclick="npc_clicked(${index})">
                 <img src="/static/images/npc-${character_sheet.avatar_id}.png"/><br/>
                 ${character_sheet.name}
             </td>
@@ -49,30 +49,35 @@ function update_character_positions(position_list) {
 }
     
     
-
-function display_character_health() {
-    var hit_points_total = character_list[0].hit_points_total;
-    var hit_points_current = character_list[0].hit_points_current;
-    var percentage = (hit_points_current/hit_points_total)*100;
-
-    var character_element = $(".character")[0];
-
-    var color;
-    var opacity = "1";
-    if (percentage == 100) {
-        color="green";
-    } else if (percentage > 50) {
-        color="yellow";
-    } else if (percentage > 0) {
-        color="red";
-    } else {
-        color="grey";
-        opacity=".7";
+//TODO Refactor for updated possition list
+function display_character_health(position_list) {
+    for (index=0; index<=position_list.length-1; index++) {
+        character_sheet = position_list[index]
+        var hit_points_total = character_sheet.hit_points_total;
+        var hit_points_current = character_sheet.hit_points_current;
+        var percentage = (hit_points_current/hit_points_total)*100;
+        
+        var color;
+        var opacity = "1";
+        if (percentage == 100) {
+            color="green";
+        } else if (percentage > 50) {
+            color="yellow";
+        } else if (percentage > 0) {
+            color="red";
+        } else {
+            color="grey";
+            opacity=".7";
+        }
+        $("#char_" + index).css("border-color", color);
+        //character_element.style["border-color"]=color;
+        $("#char_" + index).css("opacity", opacity);
+        //character_element.style["opacity"]=opacity;
     }
-    character_element.style["border-color"]=color;
-    character_element.style["opacity"]=opacity;
 }
 
+
+// TODO Refactor into generic select and highlight
 function npc_clicked(position_index) {     
     if (npc_clicked_action == null){
         return;
@@ -82,3 +87,12 @@ function npc_clicked(position_index) {
     }
 }
 
+function highlight_npc_characters(position_list, position_index= null) {
+    if  (position_index==null) {
+        for(index = 4; index <= position_list.length - 1; index++) {
+            $("#char_" + index).css("border-color", "red");
+        }
+    } else {
+        $("#char_" + position_index).css("border-color", "blue");
+    }
+}    

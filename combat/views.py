@@ -11,7 +11,6 @@ from dice import models as dice
 
 def init_combat(request): 
     game_id = request.session['game_id']
-    print('game_id='+ str(game_id))
     combat_mode = request.session['combat_mode'] 
     position_list, turn_order_list = service.init_combat(game_id, combat_mode['npc_list'])
     

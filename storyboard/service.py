@@ -14,7 +14,6 @@ def get_script(request, game_id, script_id):
 
 def generate_position_list(game_id, script):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
-    print('PC_Character='+ str(player_character_list)) #shows results to console
     non_player_character_list = []
     for name in script['npc_list']:
         non_player_character_list.append(NPC_Character.objects.filter(name = name).first())
