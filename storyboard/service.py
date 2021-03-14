@@ -5,7 +5,7 @@ from . import models
 def get_script(request, game_id, script_id):
     #background_image, npc_id_list = get_scene(script_id)
     if not script_id:
-        script_id = "intro"
+        script_id = "town.intro"
     script = models.get_script(script_id)
     script['position_list'] = generate_position_list(game_id, script)
     return script

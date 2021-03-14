@@ -52,18 +52,74 @@ def sortfunc(entry):
 
 
 def init_turn(position_list, turn_order_list, current_turn):
-    if turn_order_list[current_turn] <= 3 : 
-        results = {}
-        results['is_pc'] = True
-        results['current_turn'] = current_turn 
+    results = {}
+    results['current_turn'] = current_turn
+
+    pc_party_alive, npc_party_alive = team_death_check(position_list)
+    is_dead, skip_turn_data, next_turn = death_check(position_list, turn_order_list, current_turn)
+    
+    if not pc_party_alive:
+        results['turn_status'] = 'end_combat'
+        end_combat_data = {}
+        end_combat_data['conclusion'] = 'loss'
+        end_combat_data['narration'] = 'Game Over'
+        end_combat_data['next_script'] = 'mines.intro'
+        results['end_combat_data'] = end_combat_data
+
+    #TODO Make next script dynamic.
+    elif not npc_party_alive:
+        results['turn_status'] = 'end_combat'
+        end_combat_data = {}
+        end_combat_data['conclusion'] = 'win '
+        end_combat_data['narration'] = 'You live to fight another day.'
+        end_combat_data['next_script'] = 'town'
+        results['end_combat_data'] = end_combat_data
+    
+    elif is_dead is True:
+        results['turn_status'] = 'skip_turn'
+        results['skip_turn_data'] = skip_turn_data
+    
+    elif turn_order_list[current_turn] <= 3:    # PC Turn  
+        
+        results['turn_status'] = 'pc_turn'
         next_turn = current_turn
-    else:
-        results, next_turn = handle_npc_attack(position_list, turn_order_list, current_turn)
-        results['is_pc'] = False
-        results['current_turn'] = current_turn 
-       
+    else:  # NPC Turn
+        npc_turn_data, next_turn = handle_npc_attack(position_list, turn_order_list, current_turn) 
+        results['turn_status'] = 'npc_turn'
+        results['npc_turn_data'] = npc_turn_data
+        
     return results, next_turn
 
+
+def team_death_check(position_list): 
+    pc_any_alive = False 
+    npc_any_alive = False 
+
+    for index in range(0,4):
+        character = position_list[index]
+        if character['hit_points_current'] > 0:
+            pc_any_alive = True 
+    
+    for index in range(4,len(position_list)):
+        character = position_list[index]
+        if character['hit_points_current'] > 0:
+            npc_any_alive = True
+    
+    return pc_any_alive, npc_any_alive
+
+
+ 
+def death_check(position_list, turn_order_list, current_turn):
+    is_dead = False
+    source = position_list[turn_order_list[current_turn]]
+    if source['hit_points_current'] > 0:
+        return is_dead, {}, current_turn
+    is_dead = True  
+    results = {}
+    results['status'] = 'dead'
+    results['narration'] = f"The {source['name']} is unmoving on the ground."
+    next_turn = increment_turn(turn_order_list,current_turn)
+    return is_dead, results, next_turn
 
 def handle_pc_attack(destination_index, position_list, turn_order_list, current_turn):
     source = position_list[turn_order_list[current_turn]]
@@ -77,7 +133,7 @@ def handle_pc_attack(destination_index, position_list, turn_order_list, current_
         results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
     else:
         results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
-    results['recipient_ids'] = [destination_index]
+    results['destination_ids'] = [destination_index]
     results['damage'] = [damage]
     results['natural'] = [natural]
     next_turn = increment_turn(turn_order_list,current_turn)
@@ -87,8 +143,13 @@ def handle_pc_attack(destination_index, position_list, turn_order_list, current_
 
 def handle_npc_attack(position_list, turn_order_list, current_turn):
     source = position_list[turn_order_list[current_turn]]
-    destination_index = dice.roll(4) - 1
-    destination = position_list[destination_index]
+    
+    while True:
+        destination_index = dice.roll(4) - 1
+        destination = position_list[destination_index]
+        if int(destination['hit_points_current']) > 0:
+            break  
+    
     item = source['items'][0]
     natural, damage = attack(source, item, destination)
     
@@ -97,7 +158,8 @@ def handle_npc_attack(position_list, turn_order_list, current_turn):
         results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
     else:
         results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
-    results['recipient_ids'] = [destination_index]
+    results['source_id'] = [turn_order_list[current_turn]]
+    results['destination_ids'] = [destination_index]
     results['damage'] = [damage]
     results['natural'] = [natural]
     next_turn = increment_turn(turn_order_list,current_turn)

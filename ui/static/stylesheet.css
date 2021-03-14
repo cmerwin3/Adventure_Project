@@ -126,6 +126,7 @@ table.characters_right {
     
 }
 td.character {
+    position: relative;
     border:3px solid #35161F;
     border-radius: 10px;
     background-image: linear-gradient( gray, #1a2e57);
@@ -158,7 +159,20 @@ div.character-tooltip {
     position: absolute;
     z-index: 1;
 }
-
+div.character-overlay {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 35px;
+    font-weight: bold;
+    font-style: normal;
+    /* rgba() ensures opacity applies only to the background color, not the text */
+    background: rgba(128, 128, 128, 0.0);
+    z-index: 1;
+ }
+ 
 /**** 
  Dialogue Panel at bottom of display
 ***/
@@ -261,16 +275,13 @@ div.loading_display {
 div.loading_spinner {
     display: none;
     position: absolute;
-    top: 50px;
+    bottom: 120px;
     width: 100%;
-    /*
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    */
-    color: black;
+    color: white;
     text-align: center;
-}
+    background: rgba(128, 128, 128, 0.0);
+    z-index: 1;
+ }
 div.loading_spinner img {
     width:120px;
     height:120px;

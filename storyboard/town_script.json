@@ -1,78 +1,252 @@
 [
     {
-        "script_id": "town",
+        "script_id": "town.intro",
         "background": "background-town.jpg",
         "npc_list":[],
-        "prompt": "You enter the gates of the town.  You see a bishop at the church",
+        "prompt": "You enter the southern gates of the mountain town. The streets seem bare. The market stalls are splinterd and the windows of storefronts and eateries are either broken into or boarded up. Near the center town square you see a small gatehring of people and facing them is a man in a tattered suit and tophat. ",
         "responses": 
         [
             {
-                "response": "Talk to the bishop.",
-                "next_script": "town.bishop"
-            }
-        ]
-    },
-    {
-        "script_id": "town.bishop",
-        "background": "background-town.jpg",
-        "npc_list": [ "Goblin", "Goblin", "Orc" ],
-        "prompt": "You aproach the bishop and he asks if you have the key.",
-        "responses": 
-        [
-            {
-                "response": "Ignore him and continue walking.",
-                "next_script": "town"
+                "response": "Approach the townsfolk and listen.",
+                "next_script": "town.mayor"
             },
             {
-                "response": "Test.",
-                "next_script": "town.bishop.test"
-            },
-            {
-                "response": "You offer him the key.",
-                "required_item": "Golden Key", 
-                "show_if_missing": false,
-                "narration": "The bishop uses your key and unlocks the crypt...",
-                "next_script": "town.crypt"
-            },
-            {
-                "response": "Punch him.",
-                "next_script": "town",
-                "combat_mode": {
+                "response": "Test Combat",
+                "next_script": "town.intro",
+                "combat_mode":{
                     "background": "background-mine.jpg",
-                    "npc_list": [ "Goblin", "Goblin", "Orc" ]
+                    "npc_list": ["Goblin", "Orc"]
                 }
             }
         ]
     },
     {
-        "script_id": "town.bishop.test",
-        "background": "",
-        "npc_list": [],
-        "prompt": "You aproach the bishop and he asks if you have the key.",
+        "script_id": "town",
+        "background": "background-town.jpg",
+        "npc_list":[],
+        "prompt": "Standing in the center of town you see the miner's lodgehouse to your east, the inn to your west, and to the north is the gate out of town that leads deeper into the mountain range.'",
         "responses": 
         [
             {
-                "response": "Pass by and continue.",
+                "response": "Appraoch the Tavern.",
+                "next_script": "town.scholar"
+            },
+            {
+                "response": "Approach the Lodgehouse.",
+                "next_script": "town.foreman"
+            },
+            {
+                "response": "Make your way to the North Gate.",
+                "next_script": "town.militia"
+            }
+        ]
+    },
+    {
+        "script_id": "town.mayor",
+        "background": "",
+        "npc_list": [],
+        "prompt": "Standing before a colective group of miners, merchants, and townspeople is a man who is explaining 'There has been no word of aid from any trade company or that of the crown. We must defend ourselves by other means.' His eyes scan the crowd and land on your group. 'You there travlers what brings you to town?' ",
+        "responses": 
+        [
+            {
+                "response": "'We come seeking coin and trade.'",
+                "next_script": "town.mayor.1"
+            },
+            {
+                "response": "'We are mercinaries in search of work.'",
+                "next_script": "town.mayor.2"
+            },
+            {
+                "response": "'We are only passing through and seek a place to stay for a time.'",
+                "next_script": "town.mayor.1"
+            }
+        ]
+    },
+    {
+        "script_id": "town.mayor.1",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'I am sorry to say that you will find no rest or trade here. A raid 0f Orcs and Goblins have overtaken our town's mine and have made a war camp out of it. They are ambushing trade wagons and some have rode into town to pillage what they can from us. Our town militia is ill equiped to defend from this threat and as I said no relief effort is comming. Could you aid us?'",
+        "responses": 
+        [
+            {
+                "response": "'We will do everything we can to push back thier forces.'",
+                "next_script": "town.mayor.3"
+            },
+            {
+                "response": "'We could... for coin.'",
+                "next_script": "town.mayor.3"
+            }
+        ]
+    },
+    {
+        "script_id": "town.mayor.2",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'Well I so happen to be in the market for mercenaries. A raid 0f Orcs and Goblins have overtaken our town's mine and have made a war camp out of it. They are ambushing trade wagons and some have rode into town to pillage what they can from us. Our town militia is ill equiped to defend from this threat and as I said no relief effort is comming. What say you?'",
+        "responses": 
+        [
+            {
+                "response": "'You can count on us!'",
+                "next_script": "town.mayor.3"
+            },
+            {
+                "response": "'I suppose we could step in...'",
+                "next_script": "town.mayor.3"
+            }
+        ]
+    },
+    {
+        "script_id": "town.mayor.3",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'That is a relief to hear. And of course you will be compensated for your efforts. Please speak to the townsfolk for more information. Our militia captain has had the most experiance with engaging these beasts, you can find her at the northern gate. Our mines' foreman knows the hills and tunnels better than anyone else he is in the miners lodgehouse nearby. We have also had another vistor lately. A scholar is staying at the inn, perhaps he may have some usful information for you. Thank you for this, and good luck!'",
+        "responses": 
+        [
+            {
+                "response": "Get your barrings in the center of town.",
                 "next_script": "town"
             }
         ]
     },
     {
-        "script_id": "town.crypt",
+        "script_id": "town.militia",
         "background": "",
-        "npc_list":[],
-        "prompt": "You walk down into the crypt. You see a strange stone with carvings on it",
+        "npc_list": [],
+        "prompt": "Approaching the northern gate of town you see a wartorn stone archway that once sheilded the town from danger. The great wooden doors have been broken from thier hindges in a previous siege, but have now been repurposed into a ramshackeld barracade. Guarding this fortfication is a dozen of lightly armored militia members. Walking up to meet you is the captain. 'Hold strangers, you are too well armed to be mere merchants or travelers. What is your intent here?'",
         "responses": 
         [
             {
-                "response": "Touch the stone",
+                "response": "'The mayor requested we drive back the raiders in the mines, we seek passage, and any information you may have about them.'",
+                "next_script": "town.militia.1"
+            },
+            {
+                "response": "'We have come to slay the raiders and do your job for you, Captain.'",
+                "next_script": "town.militia.2"
+            }
+        ]
+    },
+    {
+        "script_id": "town.militia.1",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'I see. We are grateful for any aid but I doubt you alone could drive back such a force. The orcs number in a score at least, they are formitable and ruthless in their attacks. The goblins in double that number however they are more cowardly. They where last seen riding on wargs back to the mines in the north-western mountian pass.'",
+        "responses": 
+        [
+            {
+                "response": "'We shall take our leave.' Walk back to the town square.",
+                "narration": "test",
                 "next_script": "town"
             },
             {
-                "response": "You offer him the key.",
-                "required_item": "Golden Key", 
-                "show_if_missing": false,
-                "next_script": "town.bishop"
+                "response": "'We will handle them.' Make your way out of town along the mountain pass.",
+                "narration": "test",
+                "next_script": "town"
+            }    
+        ]
+    },
+    {
+        "script_id": "town.militia.2",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'Brazen and prideful aren't you? You face a greater threat than you know. The orcs number in a score at least, they are formitable and ruthless in their attacks. The goblins in double that number however they are more cowardly. They where last seen riding on wargs back to the mines in the north-western mountian pass.'",
+        "responses": 
+        [
+            {
+                "response": "'We shall take our leave.' Walk back to the town square.",
+                "narration": "test",
+                "next_script": "town"
+            },
+            {
+                "response": "'We will handle them.' Make your way out of town along the mountain pass.",
+                "narration": "test",
+                "next_script": "town"
+            }  
+        ]
+    },
+    {
+        "script_id": "town.foreman",
+        "background": "",
+        "npc_list": [],
+        "prompt": "Approaching the two story wooden lodgehouse you see a sign reading 'Canarry's Cradle.' Making your way into the lodge you are led to the office of the foreman of the mine. He looks up from some maps on his desk and greets you. 'How can I help you strangers?' ",
+        "responses": 
+        [
+            {
+                "response": "'We are headed to the mines to deal with the raiders. We where hoping to know more about what we are walking into.'",
+                "next_script": "town.foreman.1"
+            },
+            {
+                "response": "'We are here to slay the raider and free your mine.'",
+                "next_script": "town.foreman.2"
+            }
+        ]
+    },
+    {
+        "script_id": "town.foreman.1",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'Ah good news at last. Well the way up to the mine is through a narrow ravine. You can fight your way through their forces I suppose. But there is another way into my mines. We established an escape route incase of a cave in. Look for a juniper bush near the mouth of the ravine. Behind it is a wooden pannel covered in dirt and stone. It leads into the deep portion of the mine. With luck the beasts have not found it yet. That is your best way in.'' ",
+        "responses": 
+        [
+            {
+                "response": "'Thank you for the advice and guidance.' Walk back to the town square.'",
+                "next_script": "town"
+            }
+        ]
+    },
+    {
+        "script_id": "town.foreman.2",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'Mighty big heros you are, fighting the beasts all by your lonesome. Well the way up to the mine is through a narrow ravine. You can fight your way through their forces I suppose. But there is another way into my mines. We established an escape route incase of a cave in. Look for a juniper bush near the mouth of the ravine. Behind it is a wooden pannel covered in dirt and stone. It leads into the deep portion of the mine. With luck the beasts have not found it yet. That is your best way in.'' ",
+        "responses": 
+        [
+            {
+                "response": "'Good to know. Thank you.' Walk back to the town square.'",
+                "next_script": "town"
+            }
+        ]
+    },
+    {
+        "script_id": "town.scholar",
+        "background": "",
+        "npc_list": [],
+        "prompt": "Approaching the tavern you see a sign reading 'The Gold Flow Tavern.' Inside you find a near empty baroom. It's only parton is a man with a pint, parchment, and ink well in front of him. He looks up from his scrawlings and greets you. 'What interesting companions... what brings you to this ill begotten town?'",
+        "responses": 
+        [
+            {
+                "response": "'We have been hired to stop the raiding parties. We hear you may know more about them.'",
+                "next_script": "town.scholar.1"
+            }
+        ]
+    },
+    {
+        "script_id": "town.scholar.1",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'Well from what I understand from the towns folk is that when the Orcs and Goblins come through they only take two things: food and gems. This is interetsing to me beacuse I am hear to study the ore and gemstones that come from the mountians in this region. I belive they have unique properties of an arcane nature. My studies show that the uncut gems have the highest concentraion of this magic and those are the only kind that the raiders steal. This is very currious indeed.'",
+        "responses": 
+        [
+            {
+                "response": "'What could they want with these gems?'",
+                "next_script": "town.scholar.2"
+            },
+            {
+                "response": "'Huh. thats weird.' Walk back to the town square.",
+                "next_script": "town"
+            }
+        ]
+    },
+    {
+        "script_id": "town.scholar.2",
+        "background": "",
+        "npc_list": [],
+        "prompt": "'The exact properties of the uncut gems is a matter I am still researching but I have a theory. Similar gems have been used in arcane formule regaurding soul transferance and soul capture. This magic is necromantic in nature but from what we know of the raiders far out side their feild of influance. If this theory holds true it is troubling to the degree that the raiders may only be the pawns of a greater threat. Without more inforation this is only conjecture.'",
+        "responses": 
+        [
+            {
+                "response": "'Thank you. We will come to you with whatever information we find.' Walk back to the town square.",
+                "next_script": "town"
             }
         ]
     }

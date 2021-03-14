@@ -13,7 +13,8 @@ function update_character_positions(position_list) {
         var new_elem = `
             <td class="character" id="char_${index}">
                 <img src="/static/images/character-${character_sheet.avatar_id}.png"/><br/>
-                ${character_sheet.name}
+                ${character_sheet.name} , ${character_sheet.hit_points_current}
+                <div class="character-overlay" id="char_overlay_${index}"></div>
                 <div class="character-tooltip">
                     Class: ${character_sheet.class_level.class_type}<br/>
                     Level: ${character_sheet.class_level.level}<br/>
@@ -36,10 +37,15 @@ function update_character_positions(position_list) {
         character_sheet = position_list[index];
         
         // create new character <td> html element string and plug in the values
+        onclick_param = "";
+        if (character_sheet.hit_points_current > 0) {
+            onclick_param = `onclick=\"npc_clicked(${index})\"`;
+        }
         var new_elem = `
-            <td class="character" id="char_${index}" onclick="npc_clicked(${index})">
+            <td class="character" id="char_${index}" ${onclick_param}>
                 <img src="/static/images/npc-${character_sheet.avatar_id}.png"/><br/>
-                ${character_sheet.name}
+                ${character_sheet.name} , ${character_sheet.hit_points_current}
+                <div class="character-overlay" id="char_overlay_${index}"></div>
             </td>
             `;
         new_row += new_elem;
@@ -96,3 +102,5 @@ function highlight_npc_characters(position_list, position_index= null) {
         $("#char_" + position_index).css("border-color", "blue");
     }
 }    
+
+

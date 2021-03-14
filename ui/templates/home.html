@@ -3,8 +3,9 @@
 <html>
 <head>
     <title>Adventure Project - by Cameron Merwin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'stylesheet.css' %}"}>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'script.js' %}"></script>
     <script src="{% static 'characters.js' %}"></script>
     <script src="{% static 'combat.js' %}"></script>
@@ -20,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="character_panel">
+    <div class="character_panel" id="character_panel">
         <table class="characters_left">
             <tr id="pc_character_row">
                 
@@ -65,10 +66,6 @@
                 </td>
             </tr>
         </table>
-        <div class="loading_spinner">
-            <img src="/static/images/spinner_1.gif"/><br/>
-            Entering Combat...
-        </div>
     </div>
     <div class="dialogue_panel">
         <div class="script_display">
@@ -142,6 +139,10 @@
                 </table>
             </div>            
         </div>
+    </div>
+    <div class="loading_spinner">
+        <img src="/static/images/spinner_1.gif"/><br/>
+        Entering Combat...
     </div>
 </body>
 </html>

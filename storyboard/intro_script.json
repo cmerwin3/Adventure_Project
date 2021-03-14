@@ -8,7 +8,7 @@
         [
             {
                 "response": "Enter Game",
-                "next_script": "town"
+                "next_script": "town.intro"
             }
         ]
     }
