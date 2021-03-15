@@ -68,6 +68,7 @@ def init_turn(position_list, turn_order_list, current_turn):
 
     #TODO Make next script dynamic.
     elif not npc_party_alive:
+        save_game_state(position_list)
         results['turn_status'] = 'end_combat'
         end_combat_data = {}
         end_combat_data['conclusion'] = 'win '
@@ -209,4 +210,15 @@ def get_modifier(source, item):
     else:
         modifier = source['strength']
     return modifier
-    
+
+def save_game_state(position_list):
+    index = 0
+    while index < 4:
+        character_dict = position_list[index] 
+        id = character_dict["id"]
+        character_sheet = PC_Character.objects.get(pk = id)
+        character_sheet.hit_points_current = character_dict["hit_points_current"]
+        character_sheet.save()
+        index += 1
+
+         

@@ -23,6 +23,7 @@ function load_combat() {
 function initiate_combat_mode(combat_json) {
     // display loading div with spinner and "Entering Combat..." 
     $(".loading_spinner").fadeIn("slow");
+    $("#spinner_text").text("Entering Combat");
     // hide script display and all characters (fade out)
     $(".script_display").fadeOut("slow");
     $(".character_panel").fadeOut("slow", function() {
@@ -41,6 +42,24 @@ function initiate_combat_mode(combat_json) {
                 $(".loading_spinner").fadeOut("slow");
             });
         });
+    });
+}
+
+function end_combat_mode(script_id) {
+    // display loading div with spinner and "Entering Combat..." 
+    $(".loading_spinner").fadeIn("slow");
+    $("#spinner_text").text("Exiting Combat");
+    // hide script display and all characters (fade out)
+    $(".combat_display").fadeOut("slow");
+    $(".character_panel").fadeOut("slow", function() {
+        callback = function() {
+            $(".character_panel").fadeIn(2000, function() {
+                $(".script_display").fadeIn("slow", function() {
+                    $(".loading_spinner").fadeOut("slow");
+                });
+            });
+        }
+        load_script(script_id, callback);
     });
 }
 
@@ -75,8 +94,7 @@ function handle_current_turn() {
                     display_combat_frame("combat_narration_frame", false, narration_text = turn_json.end_combat_data.narration);
                     refresh_position_list();
                     setTimeout(function() {
-                        // TODO Animate exit combat
-                        load_script(turn_json.end_combat_data.next_script);
+                        end_combat_mode(turn_json.end_combat_data.next_script);
                     }, 5000);
                 } else if (turn_json.turn_status == "skip_turn") {
                     display_combat_frame("combat_narration_frame", false, narration_text = turn_json.skip_turn_data.narration);

@@ -17,7 +17,7 @@ var current_script_id = null;
  * 
  * @param {string} script_id The specific script_id to load, if unspecified let server decide default 
  */
-function load_script(script_id) {
+function load_script(script_id, callback = null) {
     if (script_id == null)
         script_id = "";
 
@@ -30,7 +30,10 @@ function load_script(script_id) {
                 update_background(script_json.background);
                 update_dialogue_panel(script_json);
                 update_character_positions(script_json.position_list);
-            })
+                if (callback != null) {
+                    callback();
+                }
+             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;
                 console.log( "Request Failed: " + err );
