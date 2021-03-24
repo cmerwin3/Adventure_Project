@@ -141,7 +141,7 @@
             {
                 "response": "'We will handle them.' Make your way out of town along the mountain pass.",
                 "narration": "test",
-                "next_script": "town"
+                "next_script": "mine"
             }    
         ]
     },
@@ -160,7 +160,7 @@
             {
                 "response": "'We will handle them.' Make your way out of town along the mountain pass.",
                 "narration": "test",
-                "next_script": "town"
+                "next_script": "mine"
             }  
         ]
     },

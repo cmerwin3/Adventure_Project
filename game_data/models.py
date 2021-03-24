@@ -1,6 +1,9 @@
+'''
+This creates the structure to add new users and thier saved data.
+'''
+
 from django.db import models
 
-# Create your models here.
 
 
 class GameData(models.Model):

@@ -6,8 +6,11 @@
     "items": {
         "type": "object",
         "properties": {
+            
             "script_id": { "type": "string"},
+            
             "background": { "type": "string"},
+            
             "npc_list": {
                 "type": "array",
                 "items": { 
@@ -16,17 +19,22 @@
                  },
                 "maxItems": 6
             },
+            
             "prompt": { "type": "string"},
+            
             "responses": {
                 "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
+                        
                         "response": { "type": "string"},
+                        
                         "next_script": { 
                             "type": "string",
                             "enum": [""]
                         },
+                        
                         "combat_mode": { 
                             "type": "object",
                             "properties": {
@@ -42,17 +50,23 @@
                             },
                             "required": [ "npc_list", "background" ]
                         },
+                        
                         "action": {
                             "type": "string",
                             "enum": [ "get_item", "use_item" ]
                         },
+                        
                         "item_name": { 
                             "type": "string",
                             "enum": [ "Golden Key", "Red Key" ]
                         },
+                        
                         "required_script_id": { "type": "string"},
+                        
                         "show_if_missing": { "type": "boolean"},
+                        
                         "required_item": { "type": "string"},
+                        
                         "narration": { "type": "string"}
                     },
                     "required": [ "response", "next_script" ],

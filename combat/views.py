@@ -1,13 +1,11 @@
 '''
-The Views for Combat action
+The Views for Combat Mode
 '''
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from . import service
 from character.models import PC_Character, NPC_Character
-from dice import models as dice 
-#from storyboard. import 'script'
-# from 'session'.'game_session' import game.id
+
 
 def init_combat(request): 
     game_id = request.session['game_id']
@@ -17,7 +15,6 @@ def init_combat(request):
     request.session['position_list'] = position_list
     request.session['turn_order_list'] = turn_order_list
     request.session['current_turn'] = 0
-
 
     results = {}
     results['position_list'] = position_list

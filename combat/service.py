@@ -1,14 +1,15 @@
+'''
+This logic handles the initiation, turn sequence, and exit of combat mode, including the actions of npc-characters. 
+'''
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from storyboard import service as storyboard_service
 from character.models import PC_Character, NPC_Character
 from ref_data.models import ClassLevel, Race, Item, Spell
+import random
 
-#from ref_data import Item
-from character.models import Character
-#from dice.models import roll 
-#import dice
-from dice import models as dice
+
 
 def init_combat(game_id, npc_list):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
@@ -36,7 +37,7 @@ def generate_turn_order(position_list):
     initiative_list = []
     index = 0
     for character in position_list:
-        initiative = dice.roll() + character["dexterity"]
+        initiative = dice_roll() + character["dexterity"]
         initiative_list.append({'position':index,'initiative':initiative})
         index += 1
     # Sort list by initiatve roll
@@ -66,7 +67,6 @@ def init_turn(position_list, turn_order_list, current_turn):
         end_combat_data['next_script'] = 'mines.intro'
         results['end_combat_data'] = end_combat_data
 
-    #TODO Make next script dynamic.
     elif not npc_party_alive:
         save_game_state(position_list)
         results['turn_status'] = 'end_combat'
@@ -80,11 +80,11 @@ def init_turn(position_list, turn_order_list, current_turn):
         results['turn_status'] = 'skip_turn'
         results['skip_turn_data'] = skip_turn_data
     
-    elif turn_order_list[current_turn] <= 3:    # PC Turn  
+    elif turn_order_list[current_turn] <= 3:     
         
         results['turn_status'] = 'pc_turn'
         next_turn = current_turn
-    else:  # NPC Turn
+    else:  
         npc_turn_data, next_turn = handle_npc_attack(position_list, turn_order_list, current_turn) 
         results['turn_status'] = 'npc_turn'
         results['npc_turn_data'] = npc_turn_data
@@ -146,7 +146,7 @@ def handle_npc_attack(position_list, turn_order_list, current_turn):
     source = position_list[turn_order_list[current_turn]]
     
     while True:
-        destination_index = dice.roll(4) - 1
+        destination_index = dice_roll(4) - 1
         destination = position_list[destination_index]
         if int(destination['hit_points_current']) > 0:
             break  
@@ -167,41 +167,25 @@ def handle_npc_attack(position_list, turn_order_list, current_turn):
 
     return results, next_turn
 
-
-    
 def increment_turn(turn_order_list,current_turn):
     current_turn += 1
     if current_turn == len(turn_order_list):
         current_turn = 0
     return current_turn
           
-        
-
-
 def attack(source, item, destination):
-    #Roll D20
-    natural = dice.roll()
-    # TODO Natrual 1
-    # TODO Natrual 20
-    
-    #Str or Dex
+    natural = dice_roll()
     modifier = get_modifier(source,item)
-    
-    #Total to hit
-    result = modifier + natural
-    
+    result = modifier + natural + 2
     armor_class = destination['armor_class']
-
-    
     if result >= armor_class:
-        damage = dice.roll(item['damage_dice'])+ modifier
+        damage = dice_roll(item['damage_dice'])+ modifier
         hit_points =  destination['hit_points_current'] - damage
         if hit_points < 0:
             hit_points = 0
         destination['hit_points_current'] = hit_points    
     else:
         damage = 0
-    
     return natural, damage
 
 def get_modifier(source, item):
@@ -221,4 +205,7 @@ def save_game_state(position_list):
         character_sheet.save()
         index += 1
 
-         
+# This allows any size of dice to be used in determining random outcomes of the game
+def dice_roll(max_value=20):
+    value = random.randint(1,max_value)
+    return value

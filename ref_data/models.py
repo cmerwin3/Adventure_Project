@@ -1,9 +1,13 @@
+'''
+This defines the structure of the 4 basic tables needed for creating a character: Class, Race, Items, and Spells. 
+'''
+
 from django.db import models
 
 class ClassType(models.TextChoices):
     CLERIC = 'Cleric'
     FIGHTER = 'Fighter'
-    ROUGE = 'Rouge'
+    ROGUE = 'Rogue'
     WIZARD = 'Wizard'
 
 class RaceType(models.TextChoices):
@@ -35,38 +39,14 @@ class SchoolType(models.TextChoices) :
     ILLUSION = 'Illusion'
     NECROMANCY = 'Necromancy'
     TRANSMUTATION = 'Transmutaion'
-
-
-'''
-class Ability(models.TextChoices):
-    STRENGTH = 'Strength'
-    DEXTERITY = 'Dexterity'
-    CONSTITUTION = 'Constitution'
-    INTELLEGENCE = 'Intellegence'
-    WISDOM = 'Wisdom'
-    CHARISMA = 'Charisma'
-
-class Skill(models.TextChoices):
-    ACROBATICS = 
-    ANIMAL_HANDILING = 
-'''
-
-    
-    
-
     
 class ClassLevel(models.Model):
     class_type = models.CharField(max_length=30, null=True, choices=ClassType.choices)
     level = models.IntegerField()
     hit_dice_type = models.IntegerField()
-    '''proficencies = models.CharField(max_length=30)
-    proficencies_bounus= models.IntegerField()'''
     spell_slot = models.IntegerField()
     class Meta:
         db_table = 'class_level'
-
-    
-    
 
 class Race(models.Model):
     race_type = models.CharField(max_length=30, null=True, choices=RaceType.choices)
@@ -81,8 +61,6 @@ class Race(models.Model):
     class Meta: 
         db_table = 'race'
 
-
-    
 class Item(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
@@ -93,7 +71,6 @@ class Item(models.Model):
     attack_modifier = models.IntegerField()
     class Meta: 
         db_table = 'item'
-
 
 class Spell(models.Model):
     name = models.CharField(max_length=30)

@@ -1,3 +1,5 @@
+//This javascript handles the dynamic aspects of combat mode including animations and buttons.
+
 var saved_combat_json = null;
 
 
@@ -7,12 +9,14 @@ function load_combat() {
     $.getJSON( url )
             .done(function( combat_json ) {
                 console.log( "Combat JSON loaded");
-                initiate_combat_mode(combat_json);
+                callback = function() {
+                    handle_current_turn();
+                }
+                initiate_combat_mode(combat_json, callback);
                 create_turn_list(combat_json);
                 // remember the json data for future reference
                 saved_combat_json = combat_json;
                 // start turn sequence
-                handle_current_turn();
             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error;
@@ -20,7 +24,7 @@ function load_combat() {
             });
 }
 
-function initiate_combat_mode(combat_json) {
+function initiate_combat_mode(combat_json, callback) {
     // display loading div with spinner and "Entering Combat..." 
     $(".loading_spinner").fadeIn("slow");
     $("#spinner_text").text("Entering Combat");
@@ -39,7 +43,9 @@ function initiate_combat_mode(combat_json) {
         $(".character_panel").fadeIn(2000, function() {
             // TODO... display empty turn list box
             $(".combat_display").fadeIn("slow", function() {
-                $(".loading_spinner").fadeOut("slow");
+                $(".loading_spinner").fadeOut("slow", function() {
+                    callback();
+                });  
             });
         });
     });

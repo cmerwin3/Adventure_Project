@@ -1,9 +1,6 @@
+//This javascript handles the dynamic functionalites of moving from one script to the next.
 
-/**
- * 
- * At home page startup load the default script
- * 
- */
+
 // at home page startup load the default script
 $(document).ready(function() {
     load_script();

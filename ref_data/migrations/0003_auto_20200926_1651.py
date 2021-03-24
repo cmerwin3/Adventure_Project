@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='ClassLevel',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('class_type', models.CharField(choices=[('Cleric', 'Cleric'), ('Fighter', 'Fighter'), ('Rouge', 'Rouge'), ('Wizard', 'Wizard')], max_length=30, null=True)),
+                ('class_type', models.CharField(choices=[('Cleric', 'Cleric'), ('Fighter', 'Fighter'), ('Rogue', 'Rogue'), ('Wizard', 'Wizard')], max_length=30, null=True)),
                 ('level', models.IntegerField()),
                 ('hit_dice', models.IntegerField()),
                 ('spell_slot', models.IntegerField()),

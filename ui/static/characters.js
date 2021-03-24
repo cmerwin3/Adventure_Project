@@ -1,4 +1,7 @@
-    
+//This javascript handles the display and dynamic aspects of individual characters in the game.    
+
+
+
 // calback funtion for when an NPC is Clicked
 var npc_clicked_action = null
 
@@ -14,6 +17,7 @@ function update_character_positions(position_list) {
             <td class="character" id="char_${index}">
                 <img src="/static/images/character-${character_sheet.avatar_id}.png"/><br/>
                 ${character_sheet.name} , ${character_sheet.hit_points_current}
+                <div class="hp_bar_container"><div class="hp_bar" id="hp_bar_${index}"></div></div>
                 <div class="character-overlay" id="char_overlay_${index}"></div>
                 <div class="character-tooltip">
                     Class: ${character_sheet.class_level.class_type}<br/>
@@ -45,6 +49,7 @@ function update_character_positions(position_list) {
             <td class="character" id="char_${index}" ${onclick_param}>
                 <img src="/static/images/npc-${character_sheet.avatar_id}.png"/><br/>
                 ${character_sheet.name} , ${character_sheet.hit_points_current}
+                <div class="hp_bar_container"><div class="hp_bar" id="hp_bar_${index}"></div></div>
                 <div class="character-overlay" id="char_overlay_${index}"></div>
             </td>
             `;
@@ -75,10 +80,11 @@ function display_character_health(position_list) {
             color="grey";
             opacity=".7";
         }
-        $("#char_" + index).css("border-color", color);
-        //character_element.style["border-color"]=color;
+       
         $("#char_" + index).css("opacity", opacity);
-        //character_element.style["opacity"]=opacity;
+        $("#hp_bar_" + index).css("width", percentage + "%");
+        $("#hp_bar_" + index).css("background-color", color);
+
     }
 }
 

@@ -1,16 +1,24 @@
+'''
+Logic for the storyboard and the handling of individual scripts.
+'''
+
+
 from character.models import PC_Character, NPC_Character
 from . import models
+from game_data import service as game_data_service
 
 
 def get_script(request, game_id, script_id):
-    #background_image, npc_id_list = get_scene(script_id)
     if not script_id:
-        script_id = "town.intro"
+        script_id = game_data_service.get_last_script(game_id)
+        if not script_id:
+            script_id = "town.intro"
     script = models.get_script(script_id)
     script['position_list'] = generate_position_list(game_id, script)
+    
+    game_data_service.save_last_script(script_id, game_id)
+
     return script
-
-
 
 def generate_position_list(game_id, script):
     player_character_list = PC_Character.objects.filter(game_id = game_id)
@@ -44,18 +52,10 @@ def handle_response(request, game_id, script_id, response_id):
             combat_mode['background'] = script['background']
         data['combat_mode'] = response['combat_mode']
     data['next_script'] = response['next_script']
-    
+
     return data
    
 
-
-
-
-
-
-'''
-Combat Funtions
-'''
 def init_combat(script_id):
     
     npc_id_list = [1,1,1]

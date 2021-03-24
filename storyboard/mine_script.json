@@ -1,0 +1,56 @@
+[
+    {
+        "script_id": "mine",
+        "background": "background-mine.jpg",
+        "npc_list":[],
+        "prompt": "As you approach the ravien that leads to the mines you see broken crates and tools litter the entry of the ravine that is marked by a stone archway and shaded by a juniper bush.",
+        "responses": 
+        [
+            {
+                "response": "Walk through the stone entryway.",
+                "next_script": "mine.1"
+            }
+        ]
+    },
+    {
+        "script_id": "mine.1",
+        "background": "background-mine.jpg",
+        "npc_list":[],
+        "prompt": "As you wind your way down the mine shaft you see chamber after chamber of empty campsights and broken karts. From a single cavern at the bottom you see torchlight beyond. ",
+        "responses": 
+        [
+            {
+                "response": "Enter the chamber.",
+                "next_script": "mine.2"
+            }
+        ]
+    },{
+        "script_id": "mine.2",
+        "background": "background-town.jpg",
+        "npc_list":[],
+        "prompt": "Entering the chamber you see an Orc barking orders at two Goblins.  ' `Urry up you useless lot. The last of these gems are headed up the mountain tonight. If dey don't you not gonna see the sunrise.' ",
+        "responses": 
+        [
+            {
+                "response": "Draw you weapons",
+                "next_script": "mine.orc",    
+                "combat_mode":{
+                    "background": "background-mine.jpg",
+                    "npc_list": ["Goblin","Goblin", "Orc"]
+                }    
+            }
+        ]
+    },{
+        "script_id": "mine.orc",
+        "background": "background-mine.jpg",
+        "npc_list":[],
+        "prompt": "The Orc lies bleeding on the stone and as the battle subsides he spits a bloody curse at you, 'You will rue this in time, my death is welcomed by the Stone itself, but your last breath will be one of terror and agony as the Lord of the Mountain wills it. Stone... take .. me.' The Orc's pain seems to swell as veins curl into the whites of his eyes and his eyes turn to stone. His final visage is one of horror. ",
+        "responses": 
+        [
+            {
+                "response": "The mines are cleared out, and the town seems safe from raids at this time. The scholoar will want to hear about what happened to the Orc and of the Lord of the Mountain. Head back to town.",
+                "next_script": "town"
+            }
+        ]
+    }
+]

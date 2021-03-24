@@ -116,7 +116,7 @@
         "model": "ref_data.ClassLevel",
         "pk": 11,
         "fields": {
-            "class_type" : "rouge",
+            "class_type" : "rogue",
             "level": 1,
             "hit_dice_type" : 8,
             "spell_slot" : 0
@@ -127,7 +127,7 @@
         "model": "ref_data.ClassLevel",
         "pk": 12,
         "fields": {
-            "class_type" : "rouge",
+            "class_type" : "rogue",
             "level": 2,
             "hit_dice_type" : 8,
             "spell_slot" : 0
@@ -138,7 +138,7 @@
         "model": "ref_data.ClassLevel",
         "pk": 13,
         "fields": {
-            "class_type" : "rouge",
+            "class_type" : "rogue",
             "level": 3,
             "hit_dice_type" : 8,
             "spell_slot" : 0
@@ -148,7 +148,7 @@
         "model": "ref_data.ClassLevel",
         "pk": 14,
         "fields": {
-            "class_type" : "rouge",
+            "class_type" : "rogue",
             "level": 4,
             "hit_dice_type" : 8,
             "spell_slot" : 0
@@ -159,7 +159,7 @@
         "model": "ref_data.ClassLevel",
         "pk": 15,
         "fields": {
-            "class_type" : "rouge",
+            "class_type" : "rogue",
             "level": 5,
             "hit_dice_type" : 8,
             "spell_slot" : 0
