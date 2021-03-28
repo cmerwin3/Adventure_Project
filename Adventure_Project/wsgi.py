@@ -9,9 +9,14 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
 
 import os
 
-from django.core.wsgi import get_wsgi_application
+import sys
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Adventure_Project.settings')
-#os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+sys.path.append('/opt/bitnami/projects/Adventure_Project')
+
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/Adventure_Project/egg_cache")
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Adventure_Project.settings")
+
+from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()

@@ -6,7 +6,10 @@ import os
 from pathlib import Path
 import json
 from jsonschema import validate
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 
 # array to hold all scripts loaded in
@@ -21,7 +24,7 @@ def load_scripts():
     # helpful when creating & debugging new script components.
     # See API docs at https://python-jsonschema.readthedocs.io/en/stable/validate/
     filepath = os.path.join(current_dir, 'script_schema.json')
-    print('Loading script schema file: ' + filepath)
+    logger.info('Loading script schema file: ' + filepath)
     with open(filepath) as file_obj:
         schema = json.load(file_obj)
 
@@ -33,7 +36,7 @@ def load_scripts():
 
             # load the json data 
             filepath = os.path.join(current_dir, filename)
-            print('Loading script file: ' + filepath)
+            logger.info('Loading script file: ' + filepath)
             with open(filepath) as file_obj:
                 script_data = json.load(file_obj)
 
@@ -97,7 +100,7 @@ def find_parent_field(field_name, names, max_index):
 
 
 def get_script(script_id):
-    print('loading script:' + script_id)
+    logger.debug('loading script:' + script_id)
     return scripts[script_id]
     
     

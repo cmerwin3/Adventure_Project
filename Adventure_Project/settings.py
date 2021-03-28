@@ -25,7 +25,7 @@ SECRET_KEY = '*$p53$%pt=00nlrk!)&d=1jpj_w%gnfd$1mn@&gh%tx))%&q8='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['3.211.64.66', 'adventure.cameronmerwin.net', 'localhost']
 
 
 # Application definition
@@ -126,3 +126,35 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+# Logger config
+
+LOGGING = {
+   'version': 1,
+   'disable_existing_loggers': False,
+   'formatters': {
+       'detailed': {
+           'format': '{asctime} {levelname} {name} {message}',
+           'style': '{',
+       },
+   },
+   'handlers': {
+       'console': {
+           'class': 'logging.StreamHandler',
+       },
+       'file': {
+           'level': 'INFO',
+           'class': 'logging.FileHandler',
+           'filename': os.path.join(BASE_DIR, 'logs', 'output.log'),
+           'formatter': 'detailed'
+       },
+   },
+   'loggers': {
+       # 'root' logger
+       '': {
+           'handlers': ['console', 'file'],
+           'level': 'DEBUG',
+       },
+   },
+}
+

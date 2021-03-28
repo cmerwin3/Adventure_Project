@@ -1,3 +1,4 @@
 *.pyc
 data/db.sqlite3
 .vscode/settings.json
+logs/*.log
