@@ -32,7 +32,7 @@ The core functionality is carried out by three layers
 
 
 ## Storyboard
-The Storyboard is composed of multiple 'scripts' as JSON files. JSON Schema is used to enforce correct JSON Structure. An example of a script file can be found [here](http://https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
+The Storyboard is composed of multiple 'scripts' as JSON files. JSON Schema is used to enforce correct JSON Structure. An example of a script file can be found [here](https://https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
 
 
 
