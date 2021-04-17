@@ -6,7 +6,7 @@ The Adventure Project is a full-stack web-based adventure game inspired by table
 
 
 ### Game Link 
-Here is a link to a live version of the Adventure Project. Please feel free to regester a username and password and enjoy the story.
+Here is a link to a live version of the Adventure Project. Please feel free to register a username and password and enjoy the story.
 [http://adventure.cameronmerwin.net/](http://adventure.cameronmerwin.net/)
 
 
@@ -28,8 +28,8 @@ The game functions in two parts. The first is Script Mode which contains the dia
 The core functionality is carried out by three layers.
 1. UI (Javascript, HTML, CSS)
     - A thin client with intuitive controls that use REST API to intitate actions with the server and display current game state.
-	- Using a single [HTML page structure](https://github.com/cmerwin3/Adventure_Project/blob/master/ui/templates/home.html) the client is updated based on current game state. 
-2. Servver (Python/Django)
+	- Using a single [HTML page structure](https://github.com/cmerwin3/Adventure_Project/blob/master/ui/templates/home.html) the client is dynamically updated based on current game state. 
+2. Server (Python/Django)
     - Views handle the REST API requests and save session data.
     - Services handle the business logic for script progression and combat actions.
     - Models define the structures for the business entities (ie Game Data, Player Charactes, Non-Player Characters, Class Levels, Items, and Spells).
@@ -37,13 +37,13 @@ The core functionality is carried out by three layers.
 
 
 ### Storyboard
-Inspired by the branching stories of choose your own adventure books I created storyboards which contain a series of scripts coded within JSON files. A script is composed of a `background_image`, `npc_list`, `prompt`, and one or more `responses` each of which point to the next script in a branching tree of choices. Each script has a unique id with a hierarchical structure that not only inherets key information from the parent but is also used to orginize each script within the JSON file. An example is `Town.Mayor.1` The `Mayor` is the child of `Town` and will inheret the `background_image` and `npc_list` if not provided in it's own script, the same is true for `1` is the child of `Town.Mayor`. JSON Schema is used to enforce correct JSON Structure of the scripts. An example of a script file can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
+Inspired by the branching stories of choose your own adventure books I created storyboards which contain a series of scripts coded within JSON files. A script is composed of a `background_image`, `npc_list`, `prompt`, and one or more `responses` each of which point to the next script in a branching tree of choices. Each script has a unique id with a hierarchical structure that not only inherets key information from the parent but is also used to organize each script within the JSON file. An example is 'Town.Mayor.1' The 'Mayor' is the child of 'Town' and will inherit the `background_image` and `npc_list` if not provided in it's own script, the same is true for '1' is the child of 'Town.Mayor'. JSON Schema is used to enforce correct JSON structure of the scripts. An example of a script file can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
 
 
 ### Characters and Combat
 The abstract class of `Character` functions as the parent to the concrete classes `PC_Character` and `NPC_Character`. This structure can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/character/models.py).
 
-Inspired by the rules of table top role-playing games I wrote buisness logic to handle the funtions used in combat mode. I created an array of character objects known as `position_list` so that the classes `PC_Character` and `NPC_Character` can be used by the same functions while remaining unique. Using `position_list` as the referance point for my variables allows me to have any character target any other character in any fucntion that I create maintaining maximum flexibility. 
+Inspired by the rules of table top role-playing games I wrote business logic to handle the functions used in combat mode. I created an array of character objects known as `position_list` so that the classes `PC_Character` and `NPC_Character` can be used by the same functions while remaining unique. Using `position_list` as the referance point for my variables allows me to have any character target any other character in any function that I create maintaining maximum flexibility. 
 
 
 ## REST API
