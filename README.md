@@ -1,10 +1,14 @@
 # Adventure Project
 
+
 ## Overview
 The Adventure Project is a full-stack web-based adventure game inspired by table top role-playing games and choose your own adventure stories. 
 
+
 ### Game Link 
+Here is a link to a live version of the Adventure Project. Please feel free to regester a username and password and enjoy the story.
 [http://adventure.cameronmerwin.net/](http://adventure.cameronmerwin.net/)
+
 
 ### Technologies Used 
 - Python/Django
@@ -15,35 +19,42 @@ The Adventure Project is a full-stack web-based adventure game inspired by table
 - JSON/JSON Schema
 - AWS(Lightsail, Route53)
 
+
 ## Game Play
 The game functions in two parts. The first is Script Mode which contains the dialog and narration of the story and where the player has the agency to select dialog options to continue the adventure. The second is Combat Mode which uses the statistics of the player characters against the automated non-player characters and allowing the player to make tactical choices with some randomized elements. 
 
+
 ## Architecture
-The core functionality is carried out by three layers
+The core functionality is carried out by three layers.
 1. UI (Javascript, HTML, CSS)
-    - A client with intuitive controls that use REST API to intitate actions with the server and display current game state.
-2. Python/Django
+    - A thin client with intuitive controls that use REST API to intitate actions with the server and display current game state.
+	- Using a single [HTML page structure](https://github.com/cmerwin3/Adventure_Project/blob/master/ui/templates/home.html) the client is updated based on current game state. 
+2. Servver (Python/Django)
     - Views handle the REST API requests and save session data.
     - Services handle the business logic for script progression and combat actions.
     - Models define the structures for the business entities (ie Game Data, Player Charactes, Non-Player Characters, Class Levels, Items, and Spells).
 3. Database (SQLite)
 
 
+### Storyboard
+Inspired by the branching stories of choose your own adventure books I created storyboards which contain a series of scripts coded within JSON files. A script is composed of a `background_image`, `npc_list`, `prompt`, and one or more `responses` each of which point to the next script in a branching tree of choices. Each script has a unique id with a hierarchical structure that not only inherets key information from the parent but is also used to orginize each script within the JSON file. An example is `Town.Mayor.1` The `Mayor` is the child of `Town` and will inheret the `background_image` and `npc_list` if not provided in it's own script, the same is true for `1` is the child of `Town.Mayor`. JSON Schema is used to enforce correct JSON Structure of the scripts. An example of a script file can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
 
 
-## Storyboard
-The Storyboard is composed of multiple 'scripts' as JSON files. JSON Schema is used to enforce correct JSON Structure. An example of a script file can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/storyboard/town_script.json) .
+### Characters and Combat
+The abstract class of `Character` functions as the parent to the concrete classes `PC_Character` and `NPC_Character`. This structure can be found [here](https://github.com/cmerwin3/Adventure_Project/blob/master/character/models.py).
 
+Inspired by the rules of table top role-playing games I wrote buisness logic to handle the funtions used in combat mode. I created an array of character objects known as `position_list` so that the classes `PC_Character` and `NPC_Character` can be used by the same functions while remaining unique. Using `position_list` as the referance point for my variables allows me to have any character target any other character in any fucntion that I create maintaining maximum flexibility. 
 
 
 ## REST API
 The UI sends requests to the server to intiate actions with the server to get the game state. 
 Many of the REST API responses include the following domain objects:
-- script_id - Each step of the storyboard narration is defined as a "script" which includes a prompt and multiple responses for a user to select from. Each script is defined by a unique script_id
-- prompt - Dialog and/or narration of the current script.
-- responses - An array of the retort dialog and/or narration for the player to choose from.
-- position_list - An array of character objects based on the current state of the game. There are always 4 player characters (PC) and 0-6 non-player characters (NPC). Each character object contains things like name, hit points, and other key data relevent to the buisness logic.
-- turn_order_list - Upon intiation of combat the server randomly determines the order in which each character acts in each combat round. These numbers refer to the index into the position list.  
+- `script_id` - Each step of the storyboard narration is defined as a "script" which includes a prompt and multiple responses for a user to select from. Each script is defined by a unique script_id
+- `prompt` - Dialog and/or narration of the current script.
+- `responses` - An array of the retort dialog and/or narration for the player to choose from.
+- `position_list` - An array of character objects based on the current state of the game. There are always 4 player characters (PC) and 0-6 non-player characters (NPC). Each character object contains things like name, hit points, and other key data relevent to the buisness logic.
+- `turn_order_list` - Upon intiation of combat the server randomly determines the order in which each character acts in each combat round. These numbers refer to the index into the position list.  
+
 
 ### Script Mode
 **This URL loads the next requested script based on player dialog choice, upon load if no script is supplied the system will default to an introductory script.**
@@ -84,7 +95,6 @@ Success Response: HTTP 200 OK
 
 ```
 
-
 **When a user clicks on a response this URL is sent to the server and the server responds with either the next script_id to load or combat_mode.**
 ```
 HTTP GET: {domain}/script/{script_id}/{response_id}
@@ -96,6 +106,8 @@ Success Response: HTTP 200 OK
 	“next_script”: {script_id}
 }
 ```
+
+
 ### Combat Mode
 
 
