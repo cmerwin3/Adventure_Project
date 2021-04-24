@@ -7,7 +7,15 @@ from . import service
 from character.models import PC_Character, NPC_Character
 
 
+
 def init_combat(request): 
+    '''
+    REST API called by UI when transitioning from Script Mode into Combat Mode
+    
+    Parameters : Request from session for extraction of session data 
+    Returns : A Json response of a dict composed of the characters involved in combat (position_list), 
+            the order of turns in combat (turn_order_list), and the background to be displayed
+    '''
     game_id = request.session['game_id']
     combat_mode = request.session['combat_mode'] 
     position_list, turn_order_list = service.init_combat(game_id, combat_mode['npc_list'])
@@ -24,6 +32,12 @@ def init_combat(request):
     return JsonResponse(results, json_dumps_params={'indent': 2})
 
 def init_turn(request):
+    '''
+    REST API Called by UI during Combat Mode at the start of each turn in combat
+    
+    Parameters : Request from session for extraction of session data 
+    Returns : A Json response of a dict composed of the results from init_turn in the combat.service
+    '''
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']
     current_turn = request.session['current_turn']
@@ -34,6 +48,9 @@ def init_turn(request):
 
 
 def get_positions(request):
+    '''
+    REST API called to refresh the current state of the position list and the character objects within
+    '''
     position_list = request.session['position_list']
     results = {}
     results['position_list'] = position_list
@@ -41,6 +58,9 @@ def get_positions(request):
 
 
 def do_attack(request):
+    '''
+    REST API called when the user intiates an attack in combat
+    '''
     destination_index = int(request.GET.get('destination_index'))
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']

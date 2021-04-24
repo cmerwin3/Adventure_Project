@@ -1,5 +1,5 @@
 '''
-This creates the structure to add new users and thier saved data.
+This creates the structure to add new users and their saved data.
 '''
 
 from django.db import models

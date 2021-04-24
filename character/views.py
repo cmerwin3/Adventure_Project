@@ -1,5 +1,5 @@
 '''
-The Views for a player and non-player characters
+The Views for a PCs and NPCs
 '''
 
 from django.shortcuts import render

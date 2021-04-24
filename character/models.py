@@ -1,14 +1,17 @@
+'''
+Data models for characters
+'''
+
 from django.db import models
 from django.forms.models import model_to_dict
 from ref_data.models import ClassLevel, Race, Item, Spell
 from game_data.models import GameData
 
+'''
+Abstract base Class for characters
+'''
 
 class Character(models.Model):
-    
-    ##def __init__(self,armor_class = 10):
-        ##self.armor_class = armor_class
-
     class Meta:
         abstract = True
         ordering = ['id']
@@ -87,9 +90,12 @@ class Character(models.Model):
             data[field.name] = object_list
         return data
 
+'''
+Concrete class for PCs and NPCs
+'''
 class PC_Character(Character):
     
-    game = models.ForeignKey(GameData, null=True, on_delete=models.SET_NULL)
+    game = models.ForeignKey(GameData, null=True, on_delete=models.CASCADE)
 
     class_level = models.ForeignKey(ClassLevel, null=True, on_delete=models.SET_NULL)
     

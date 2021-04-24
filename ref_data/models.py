@@ -1,5 +1,6 @@
 '''
-This defines the structure of the 4 basic tables needed for creating a character: Class, Race, Items, and Spells. 
+This defines the structure of the 4 basic tables needed for creating a character: 
+Class, Race, Items, and Spells. As well as defining damage types for future implemntation.
 '''
 
 from django.db import models

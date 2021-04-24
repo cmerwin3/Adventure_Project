@@ -2,7 +2,6 @@
 Logic for the storyboard and the handling of individual scripts.
 '''
 
-
 from character.models import PC_Character, NPC_Character
 from . import models
 from game_data import service as game_data_service
@@ -25,7 +24,6 @@ def generate_position_list(game_id, script):
     non_player_character_list = []
     for name in script['npc_list']:
         non_player_character_list.append(NPC_Character.objects.filter(name = name).first())
-    
     
     position_list = []
     #position 0-3 is always PC characters

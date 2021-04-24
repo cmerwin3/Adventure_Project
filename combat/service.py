@@ -12,6 +12,9 @@ import random
 
 
 def init_combat(game_id, npc_list):
+    '''
+    Called to gather the list of PCs and NPCs then compile them into the position_list to be used in combat.
+    '''
     player_character_list = PC_Character.objects.filter(game_id = game_id)
     non_player_character_list = []
     for name in npc_list:
@@ -33,16 +36,18 @@ def init_combat(game_id, npc_list):
 
 
 def generate_turn_order(position_list):
-    #create a list of pairs containing position in UI and initiative roll
+    '''
+    Randomly determins the order of turns in combat.
+    '''
     initiative_list = []
     index = 0
     for character in position_list:
         initiative = dice_roll() + character["dexterity"]
         initiative_list.append({'position':index,'initiative':initiative})
         index += 1
-    # Sort list by initiatve roll
+    
     initiative_list.sort(key=sortfunc)
-    # Create new list of positions in order of initiative
+    
     turn_order_list = []
     for entry in initiative_list:
         turn_order_list.append(entry['position'])
@@ -53,6 +58,15 @@ def sortfunc(entry):
 
 
 def init_turn(position_list, turn_order_list, current_turn):
+    '''
+    Called at the begining of each turn to determine one of five scenarios 
+    
+    1. If all PCs have zero hit points result in Game Over
+    2. If all NPCs have zero hit points result in Victory
+    3. If the current turn (PC or NPC) has zero hit points then skip the current turn
+    4. Is a PCs turn (if so wait for user input)
+    5. Is a NPCs turn (if so make an automated attack)
+    '''
     results = {}
     results['current_turn'] = current_turn
 
@@ -93,6 +107,9 @@ def init_turn(position_list, turn_order_list, current_turn):
 
 
 def team_death_check(position_list): 
+    '''
+    Called to determin if any PCs or NPCs have 1 or more hit points and return each team as seperate variable
+    '''
     pc_any_alive = False 
     npc_any_alive = False 
 
@@ -123,6 +140,9 @@ def death_check(position_list, turn_order_list, current_turn):
     return is_dead, results, next_turn
 
 def handle_pc_attack(destination_index, position_list, turn_order_list, current_turn):
+    '''
+    Called when a user clicks the attack button and choses a target
+    '''
     source = position_list[turn_order_list[current_turn]]
     destination = position_list[destination_index]
    
@@ -143,6 +163,9 @@ def handle_pc_attack(destination_index, position_list, turn_order_list, current_
 
 
 def handle_npc_attack(position_list, turn_order_list, current_turn):
+    '''
+    Called during an NPCs turn to randomly choose a PC to attack
+    '''
     source = position_list[turn_order_list[current_turn]]
     
     while True:
@@ -205,7 +228,7 @@ def save_game_state(position_list):
         character_sheet.save()
         index += 1
 
-# This allows any size of dice to be used in determining random outcomes of the game
+
 def dice_roll(max_value=20):
     value = random.randint(1,max_value)
     return value
