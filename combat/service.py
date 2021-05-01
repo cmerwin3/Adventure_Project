@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from storyboard import service as storyboard_service
 from character.models import PC_Character, NPC_Character
+from character import service as character_service
 from ref_data.models import ClassLevel, Race, Item, Spell
 import random
 
@@ -85,7 +86,7 @@ def init_turn(position_list, turn_order_list, current_turn):
         save_game_state(position_list)
         results['turn_status'] = 'end_combat'
         end_combat_data = {}
-        end_combat_data['conclusion'] = 'win '
+        end_combat_data['conclusion'] = 'win'
         end_combat_data['narration'] = 'You live to fight another day.'
         end_combat_data['next_script'] = 'town'
         results['end_combat_data'] = end_combat_data
@@ -221,11 +222,10 @@ def get_modifier(source, item):
 def save_game_state(position_list):
     index = 0
     while index < 4:
-        character_dict = position_list[index] 
-        id = character_dict["id"]
-        character_sheet = PC_Character.objects.get(pk = id)
-        character_sheet.hit_points_current = character_dict["hit_points_current"]
-        character_sheet.save()
+        character_sheet = position_list[index]
+        id = character_sheet['id']
+        hit_points_current = character_sheet['hit_points_current']
+        character_service.update_pc_character_hit_points_current(id, hit_points_current)
         index += 1
 
 

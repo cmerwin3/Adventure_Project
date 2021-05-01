@@ -26,8 +26,8 @@
         ]
     },{
         "script_id": "mine.2",
-        "background": "background-town.jpg",
-        "npc_list":[],
+        "background": "background-mine.jpg",
+        "npc_list":["Goblin","Goblin", "Orc"],
         "prompt": "Entering the chamber you see an Orc barking orders at two Goblins.  ' `Urry up you useless lot. The last of these gems are headed up the mountain tonight. If dey don't you not gonna see the sunrise.' ",
         "responses": 
         [

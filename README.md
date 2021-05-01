@@ -192,11 +192,15 @@ Success Response: HTTP 200 OK
 }
 ```
 
+### Unit Testing
+To ensure that the logic is followed in my program I have included test suites focuesed on the more dynamic asspects of my code.
+To execute the tests run the following command in a terminal: pytest
+
 
 ## Versions
 - V1 (Current)- Initial release includes Storyboards, Combat, Game Data structure, and Automated NPCs. 
 - V2 - Adding Spells, Items, more combat options, and a full story line.
-- V3 - Restructre the game into a customizable experiance where the user can input their own scripts and images to create their own adventure. 
+- V3 - Restructure the game into a customizable experiance where the user can input their own scripts and images to create unique adventures. 
 
 ## Author
 ### Cameron Merwin 
