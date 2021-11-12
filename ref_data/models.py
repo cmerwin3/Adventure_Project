@@ -17,6 +17,11 @@ class RaceType(models.TextChoices):
     HALFLING = 'Halfling'
     HUMAN = 'Human'
 
+class SpellType(models.TextChoices):
+    ATTACK_SPELL = 'Attack_Spell'
+    RESIST_SPELL = 'Resist_Spell'
+    UTILITY_SPELL = 'Utility_Spell'
+
 class DamageType(models.TextChoices):
     BLUDGEONING = 'Bludgeoning'
     PIERCING = 'Piercing'
@@ -75,9 +80,10 @@ class Item(models.Model):
 
 class Spell(models.Model):
     name = models.CharField(max_length=30)
-    spell_level = models.IntegerField()
-    school = models.CharField(max_length=30, null=True, choices=SchoolType.choices)
     description = models.CharField(max_length=100)
+    spell_level = models.IntegerField()
+    spell_type = models.CharField(max_length=30, null=True, choices=SpellType.choices)
+    school = models.CharField(max_length=30, null=True, choices=SchoolType.choices)
     damage_type = models.CharField(max_length=30, null=True, choices=DamageType.choices)
     damage_dice = models.IntegerField()
     class Meta: 

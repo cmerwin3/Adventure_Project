@@ -3,10 +3,11 @@
         "model": "ref_data.Spell",
         "pk": 1,
         "fields": {
-          "name": "cure_wounds",
+          "name": "Cure Wounds",
+          "description": "Restore wounds upon an ally with divine grace.",
           "spell_level": 1,
-          "school":"evocation",
-          "description": "cure wounds",
+          "spell_type": "Utility_Spell",
+          "school":"necromancy",
           "damage_type": "healing",
           "damage_dice": 8
     
@@ -16,14 +17,29 @@
         "model": "ref_data.Spell",
         "pk": 2,
         "fields": {
-          "name": "inflict_wounds",
+          "name": "Inflict Wounds",
+          "description": "Open wounds upon an enemy with necrotic power.",
           "spell_level": 1,
-          "school": "evocation",
-          "description": "inflict wounds",
+          "spell_type": "Attack_Spell",
+          "school": "necromancy",
           "damage_type": "necrotic",
           "damage_dice": 8
     
           }
-    }
-
+          
+    },
+    {
+        "model": "ref_data.Spell",
+        "pk": 3,
+        "fields": {
+         "name": "Burning Hands",
+         "description": "Burn an enemy with embers.",
+         "spell_level": 1,
+         "spell_type": "Resist_Spell",
+         "school": "evocation",
+         "damage_type": "fire",
+         "damage_dice": 6
+  
+        }
+      }
 ]
