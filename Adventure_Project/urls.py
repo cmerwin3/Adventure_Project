@@ -33,6 +33,7 @@ urlpatterns = [
     path('combat/turn/', combat_views.init_turn, name='init_turn'),
     path('combat/positions/', combat_views.get_positions, name='combat-positions'),
     path('combat/attack', combat_views.do_attack, name='combat-attack'),
+    path('combat/spell', combat_views.cast_spell, name='combat-spell'),
     path('script/', storyboard_views.get_script, name='get-script'), 
     path('script/<script_id>', storyboard_views.get_script, name='get-script_id'),
     path('script/<script_id>/<response_id>', storyboard_views.handle_response, name='handle_response')

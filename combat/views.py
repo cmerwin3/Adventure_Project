@@ -1,10 +1,12 @@
 '''
 The Views for Combat Mode
 '''
-from django.shortcuts import render, redirect
+
 from django.http import JsonResponse
-from . import service
-from character.models import PC_Character, NPC_Character
+from .service import attack, init, spell
+
+
+
 
 
 
@@ -18,7 +20,7 @@ def init_combat(request):
     '''
     game_id = request.session['game_id']
     combat_mode = request.session['combat_mode'] 
-    position_list, turn_order_list = service.init_combat(game_id, combat_mode['npc_list'])
+    position_list, turn_order_list = init.init_combat(game_id, combat_mode['npc_list'])
     
     request.session['position_list'] = position_list
     request.session['turn_order_list'] = turn_order_list
@@ -41,7 +43,7 @@ def init_turn(request):
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']
     current_turn = request.session['current_turn']
-    results, next_turn = service.init_turn(position_list, turn_order_list, current_turn)
+    results, next_turn = init.init_turn(position_list, turn_order_list, current_turn)
     
     request.session['current_turn'] = next_turn
     return JsonResponse(results, json_dumps_params={'indent': 2})
@@ -65,9 +67,22 @@ def do_attack(request):
     position_list = request.session['position_list']
     turn_order_list = request.session['turn_order_list']
     current_turn = request.session['current_turn']
-    results, next_turn = service.handle_pc_attack(destination_index, position_list, turn_order_list, current_turn)
+    results, next_turn = attack.handle_pc_attack(destination_index, position_list, turn_order_list, current_turn)
     
     request.session['current_turn'] = next_turn
     return JsonResponse(results, json_dumps_params={'indent': 2})
     
 
+def cast_spell(request):
+    '''
+    REST API called when a user initiates a spell in combat
+    '''
+    destination_index = int(request.GET.get('destination_index'))
+    spell_id = int(request.GET.get('spell_id'))
+    position_list = request.session['position_list']
+    turn_order_list = request.session['turn_order_list']
+    current_turn = request.session['current_turn']
+    results, next_turn = spell.handle_pc_spell(destination_index, position_list, turn_order_list, current_turn, spell_id)
+    
+    request.session['current_turn'] = next_turn
+    return JsonResponse(results, json_dumps_params={'indent': 2})

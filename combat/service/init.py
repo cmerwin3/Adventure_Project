@@ -1,14 +1,7 @@
-'''
-This logic handles the initiation, turn sequence, and exit of combat mode, including the actions of npc-characters. 
-'''
 
-from django.shortcuts import render
-from django.http import HttpResponse
-from storyboard import service as storyboard_service
 from character.models import PC_Character, NPC_Character
-from character import service as character_service
-from ref_data.models import ClassLevel, Race, Item, Spell
-import random
+from . import attack
+from . import utility
 
 
 
@@ -43,7 +36,7 @@ def generate_turn_order(position_list):
     initiative_list = []
     index = 0
     for character in position_list:
-        initiative = dice_roll() + character["dexterity"]
+        initiative = utility.dice_roll() + character["dexterity"]
         initiative_list.append({'position':index,'initiative':initiative})
         index += 1
     
@@ -83,7 +76,7 @@ def init_turn(position_list, turn_order_list, current_turn):
         results['end_combat_data'] = end_combat_data
 
     elif not npc_party_alive:
-        save_game_state(position_list)
+        utility.save_game_state(position_list)
         results['turn_status'] = 'end_combat'
         end_combat_data = {}
         end_combat_data['conclusion'] = 'win'
@@ -100,7 +93,7 @@ def init_turn(position_list, turn_order_list, current_turn):
         results['turn_status'] = 'pc_turn'
         next_turn = current_turn
     else:  
-        npc_turn_data, next_turn = handle_npc_attack(position_list, turn_order_list, current_turn) 
+        npc_turn_data, next_turn = attack.handle_npc_attack(position_list, turn_order_list, current_turn) 
         results['turn_status'] = 'npc_turn'
         results['npc_turn_data'] = npc_turn_data
         
@@ -137,98 +130,5 @@ def death_check(position_list, turn_order_list, current_turn):
     results = {}
     results['status'] = 'dead'
     results['narration'] = f"The {source['name']} is unmoving on the ground."
-    next_turn = increment_turn(turn_order_list,current_turn)
+    next_turn = utility.increment_turn(turn_order_list,current_turn)
     return is_dead, results, next_turn
-
-def handle_pc_attack(destination_index, position_list, turn_order_list, current_turn):
-    '''
-    Called when a user clicks the attack button and choses a target
-    '''
-    source = position_list[turn_order_list[current_turn]]
-    destination = position_list[destination_index]
-   
-    item = source['items'][0]
-    natural, damage = attack(source, item, destination)
-    
-    results = {}
-    if damage == 0:
-        results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
-    else:
-        results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
-    results['destination_ids'] = [destination_index]
-    results['damage'] = [damage]
-    results['natural'] = [natural]
-    next_turn = increment_turn(turn_order_list,current_turn)
-
-    return results, next_turn
-
-
-def handle_npc_attack(position_list, turn_order_list, current_turn):
-    '''
-    Called during an NPCs turn to randomly choose a PC to attack
-    '''
-    source = position_list[turn_order_list[current_turn]]
-    
-    while True:
-        destination_index = dice_roll(4) - 1
-        destination = position_list[destination_index]
-        if int(destination['hit_points_current']) > 0:
-            break  
-    
-    item = source['items'][0]
-    natural, damage = attack(source, item, destination)
-    
-    results = {}
-    if damage == 0:
-        results['narration'] = f"The {source['name']} missed their attack against {destination['name']}."
-    else:
-        results['narration'] = f"The {source['name']} attacked {destination['name']} with a {item['name']} for {damage} damage."
-    results['source_id'] = [turn_order_list[current_turn]]
-    results['destination_ids'] = [destination_index]
-    results['damage'] = [damage]
-    results['natural'] = [natural]
-    next_turn = increment_turn(turn_order_list,current_turn)
-
-    return results, next_turn
-
-def increment_turn(turn_order_list,current_turn):
-    current_turn += 1
-    if current_turn == len(turn_order_list):
-        current_turn = 0
-    return current_turn
-          
-def attack(source, item, destination):
-    natural = dice_roll()
-    modifier = get_modifier(source,item)
-    result = modifier + natural + 2
-    armor_class = destination['armor_class']
-    if result >= armor_class:
-        damage = dice_roll(item['damage_dice'])+ modifier
-        hit_points =  destination['hit_points_current'] - damage
-        if hit_points < 0:
-            hit_points = 0
-        destination['hit_points_current'] = hit_points    
-    else:
-        damage = 0
-    return natural, damage
-
-def get_modifier(source, item):
-    if item['has_finesse'] is True:
-        modifier = max(source['strength'], source['dexterity'])
-    else:
-        modifier = source['strength']
-    return modifier
-
-def save_game_state(position_list):
-    index = 0
-    while index < 4:
-        character_sheet = position_list[index]
-        id = character_sheet['id']
-        hit_points_current = character_sheet['hit_points_current']
-        character_service.update_pc_character_hit_points_current(id, hit_points_current)
-        index += 1
-
-
-def dice_roll(max_value=20):
-    value = random.randint(1,max_value)
-    return value
